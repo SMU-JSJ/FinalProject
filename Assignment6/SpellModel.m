@@ -17,8 +17,6 @@
 
 @implementation SpellModel
 
-@synthesize currentAlgorithm = _currentAlgorithm;
-
 // Instantiates for the shared instance of the Spell Model class
 + (SpellModel*)sharedInstance {
     static SpellModel* _sharedInstance = nil;
@@ -64,20 +62,6 @@
         _dsid = @102;
     }
     return _dsid;
-}
-
-// Initializes the currently chosen training algorithm to the first one (KNN)
-- (NSInteger)currentAlgorithm {
-    if (!_currentAlgorithm) {
-        _currentAlgorithm = 0;
-    }
-    return _currentAlgorithm;
-}
-
-// Also update the trained model for the current algorithm when it's set
-- (void)setCurrentAlgorithm:(NSInteger)currentAlgorithm {
-    _currentAlgorithm = currentAlgorithm;
-    [self updateModel];
 }
 
 // Create the array of attack spells if needed, and populates with names,
@@ -178,59 +162,10 @@
     return nil;
 }
 
-// Accumulates the counts of correct predictions and total predictions from
-// each spell to obtain a total accuracy percentage for a given algorithm
-- (double)getTotalAccuracy:(NSInteger)algorithm {
-    int correctKNN = 0;
-    int totalKNN = 0;
-    int correctSVM = 0;
-    int totalSVM = 0;
-    for (int i = 0; i < [self.attackSpells count]; i++) {
-        Spell* currentSpell = self.attackSpells[i];
-        correctKNN += [currentSpell.correctKNN intValue];
-        totalKNN += [currentSpell.totalKNN intValue];
-        correctSVM += [currentSpell.correctSVM intValue];
-        totalSVM += [currentSpell.totalSVM intValue];
-    }
-    
-    for (int i = 0; i < [self.healingSpells count]; i++) {
-        Spell* currentSpell = self.healingSpells[i];
-        correctKNN += [currentSpell.correctKNN intValue];
-        totalKNN += [currentSpell.totalKNN intValue];
-        correctSVM += [currentSpell.correctSVM intValue];
-        totalSVM += [currentSpell.totalSVM intValue];
-    }
-    
-    for (int i = 0; i < [self.defenseSpells count]; i++) {
-        Spell* currentSpell = self.defenseSpells[i];
-        correctKNN += [currentSpell.correctKNN intValue];
-        totalKNN += [currentSpell.totalKNN intValue];
-        correctSVM += [currentSpell.correctSVM intValue];
-        totalSVM += [currentSpell.totalSVM intValue];
-    }
-    
-    // Determine which numbers to use based on which algorithm is chosen,
-    // and make sure that there is at least one attempted prediction before
-    // trying to calculate accuracy. Defaults to 0% accuracy.
-    if (algorithm == 0 && totalKNN != 0) {
-        return (double)correctKNN/totalKNN * 100;
-    } else if (algorithm == 1 && totalSVM != 0) {
-        return (double)correctSVM/totalSVM * 100;
-    } else {
-        return 0;
-    }
-}
-
 // tell the server to train a new model for the given dataset id (dsid)
 - (void)updateModel {
     // create a GET request and get the reponse back as NSData
-    NSString* baseURL;
-    // Choose which route to use based on which training algorithm is picked
-    if (self.currentAlgorithm == 0) {
-        baseURL = [NSString stringWithFormat:@"%@/UpdateModelKNN",self.SERVER_URL];
-    } else {
-        baseURL = [NSString stringWithFormat:@"%@/UpdateModelSVM",self.SERVER_URL];
-    }
+    NSString* baseURL = [NSString stringWithFormat:@"%@/UpdateModelSVM",self.SERVER_URL];
     NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
     
     NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];

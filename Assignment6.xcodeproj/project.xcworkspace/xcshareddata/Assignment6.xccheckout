@@ -7,34 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>485A9FAE-527A-441A-9E14-8CE346319C77</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Assignment6</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9B2DB01B974F1C2DE7BFAB64CDBC74F4AEB0B5FB</key>
-		<string>https://github.com/SMU-JSJ/Assignment6.git</string>
+		<key>AE7D94B645AFDEABEAC20043D52F81181C507D95</key>
+		<string>https://github.com/SMU-JSJ/FinalProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Assignment6.xcodeproj/project.xcworkspace</string>
+	<string>Assignment6.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9B2DB01B974F1C2DE7BFAB64CDBC74F4AEB0B5FB</key>
+		<key>AE7D94B645AFDEABEAC20043D52F81181C507D95</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/SMU-JSJ/Assignment6.git</string>
+	<string>https://github.com/SMU-JSJ/FinalProject.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9B2DB01B974F1C2DE7BFAB64CDBC74F4AEB0B5FB</string>
+	<string>AE7D94B645AFDEABEAC20043D52F81181C507D95</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9B2DB01B974F1C2DE7BFAB64CDBC74F4AEB0B5FB</string>
+			<string>AE7D94B645AFDEABEAC20043D52F81181C507D95</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Final%20Project</string>
+			<string>FinalProject</string>
 		</dict>
 	</array>
 </dict>

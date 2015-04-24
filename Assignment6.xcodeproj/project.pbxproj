@@ -15,8 +15,6 @@
 		68F740811AD5DDCE00DB2F7C /* Assignment6Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740801AD5DDCE00DB2F7C /* Assignment6Tests.m */; };
 		68F7408C1AD60F7C00DB2F7C /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */; };
 		68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740941AD612B800DB2F7C /* TestingViewController.m */; };
-		68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */; };
-		68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */; };
 		68F7409E1AD6135100DB2F7C /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F7409D1AD6135100DB2F7C /* TrainingViewController.m */; };
 		EFB9A4D41ADB087300C44AF1 /* SpellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D31ADB087300C44AF1 /* SpellModel.m */; };
 		EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9A4D61ADB08D300C44AF1 /* Spell.m */; };
@@ -49,10 +47,6 @@
 		68F7408B1AD60F7C00DB2F7C /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
 		68F740931AD612B800DB2F7C /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
 		68F740941AD612B800DB2F7C /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
-		68F740961AD612E700DB2F7C /* AlgorithmsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlgorithmsTableViewController.h; sourceTree = "<group>"; };
-		68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlgorithmsTableViewController.m; sourceTree = "<group>"; };
-		68F740991AD6130300DB2F7C /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
-		68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		68F7409C1AD6135100DB2F7C /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
 		68F7409D1AD6135100DB2F7C /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
 		EFB9A4D21ADB087300C44AF1 /* SpellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellModel.h; sourceTree = "<group>"; };
@@ -117,10 +111,6 @@
 				68F7409D1AD6135100DB2F7C /* TrainingViewController.m */,
 				68F740931AD612B800DB2F7C /* TestingViewController.h */,
 				68F740941AD612B800DB2F7C /* TestingViewController.m */,
-				68F740961AD612E700DB2F7C /* AlgorithmsTableViewController.h */,
-				68F740971AD612E700DB2F7C /* AlgorithmsTableViewController.m */,
-				68F740991AD6130300DB2F7C /* ResultsTableViewController.h */,
-				68F7409A1AD6130300DB2F7C /* ResultsTableViewController.m */,
 				68F740711AD5DDCE00DB2F7C /* Images.xcassets */,
 				68F740731AD5DDCE00DB2F7C /* LaunchScreen.xib */,
 				68F740641AD5DDCE00DB2F7C /* Supporting Files */,
@@ -255,10 +245,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68F7409B1AD6130300DB2F7C /* ResultsTableViewController.m in Sources */,
 				EFB9A4D71ADB08D300C44AF1 /* Spell.m in Sources */,
 				68F7406A1AD5DDCE00DB2F7C /* AppDelegate.m in Sources */,
-				68F740981AD612E700DB2F7C /* AlgorithmsTableViewController.m in Sources */,
 				EFB9A4DA1ADB1D6B00C44AF1 /* RingBuffer.m in Sources */,
 				68F740671AD5DDCE00DB2F7C /* main.m in Sources */,
 				68F740951AD612B800DB2F7C /* TestingViewController.m in Sources */,

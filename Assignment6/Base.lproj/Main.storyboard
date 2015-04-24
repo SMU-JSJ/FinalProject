@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qP1-uM-uXp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="qP1-uM-uXp">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -26,7 +26,7 @@
                                 <rect key="frame" x="55" y="457" width="211" height="54"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
                                 <state key="normal" title="Hold to Cast">
-                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -129,15 +129,9 @@
                             <constraint firstItem="qpA-bI-Osu" firstAttribute="leading" secondItem="89t-cY-3cr" secondAttribute="trailing" constant="24" id="xtO-TZ-1Oz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Spell Testing Mode" id="ZL1-tO-Ecn">
-                        <barButtonItem key="rightBarButtonItem" title="KNN" id="5mR-z7-BSL">
-                            <connections>
-                                <action selector="algorithmButtonClicked:" destination="hKm-dy-9pc" id="Ug8-PV-kgF"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Spell Testing Mode" id="ZL1-tO-Ecn"/>
                     <connections>
-                        <outlet property="algorithmButton" destination="5mR-z7-BSL" id="4cp-Xh-4Ne"/>
+                        <outlet property="castSpellBackground" destination="73b-Nq-vRK" id="8BA-Gb-hN9"/>
                         <outlet property="castSpellButton" destination="QUA-Sq-cKP" id="ZOb-6E-yeV"/>
                         <outlet property="noButton" destination="qpA-bI-Osu" id="6c4-6M-Tda"/>
                         <outlet property="predictedSpellImageView" destination="ZSK-7t-B4k" id="cxq-vU-oaY"/>
@@ -261,18 +255,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
                                 <rect key="frame" x="55" y="456" width="211" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="YzR-6Z-DZx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
-                                <state key="normal" title="Start Casting">
-                                    <color key="titleColor" red="0.25882352941176473" green="0.81960784313725488" blue="0.31764705882352939" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Hold to Cast">
+                                    <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startStopCasting:" destination="LEA-Om-Iup" eventType="touchUpInside" id="cN7-QM-GL2"/>
+                                    <action selector="holdCastButton:" destination="LEA-Om-Iup" eventType="touchDown" id="1EJ-fK-9lf"/>
+                                    <action selector="releaseCastButton:" destination="LEA-Om-Iup" eventType="touchUpInside" id="gkb-8C-xbp"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-8m-blS">
@@ -341,7 +336,7 @@
         <!--Duel a Wizard-->
         <scene sceneID="KOE-I9-PYi">
             <objects>
-                <tableViewController id="Zzl-Ef-jot" customClass="AlgorithmsTableViewController" sceneMemberID="viewController">
+                <tableViewController id="Zzl-Ef-jot" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lkO-ha-bTv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

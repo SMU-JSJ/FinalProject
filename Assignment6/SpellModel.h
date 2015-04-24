@@ -15,14 +15,12 @@
 
 @property (strong, nonatomic) NSString* SERVER_URL;
 @property (strong, nonatomic) NSNumber* dsid;
-@property (nonatomic) NSInteger currentAlgorithm;
 
 @property (strong, nonatomic) NSMutableArray* attackSpells;
 @property (strong, nonatomic) NSMutableArray* healingSpells;
 @property (strong, nonatomic) NSMutableArray* defenseSpells;
 
 - (Spell*) getSpellWithName:(NSString*)spellName;
-- (double) getTotalAccuracy:(NSInteger)algorithm;
 
 - (void)updateModel;
 - (void)sendFeatureArray:(NSArray*)data withLabel:(NSString*)label;

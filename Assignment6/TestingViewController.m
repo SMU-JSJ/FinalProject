@@ -30,11 +30,10 @@
 @property (strong, nonatomic) NSOperationQueue *backQueue;
 @property (strong, nonatomic) RingBuffer *ringBuffer;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *algorithmButton;
-
 @property (weak, nonatomic) IBOutlet UITableView *spellTableView;
 
 @property (weak, nonatomic) IBOutlet UIButton *castSpellButton;
+@property (weak, nonatomic) IBOutlet UIView *castSpellBackground;
 
 @property (weak, nonatomic) IBOutlet UIImageView *predictedSpellImageView;
 @property (weak, nonatomic) IBOutlet UILabel *predictedSpellNameLabel;
@@ -91,6 +90,7 @@
         self.startCastingTime = [NSDate date];
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Casting..." forState:UIControlStateNormal];
+        [self.castSpellBackground setBackgroundColor:[[UIColor alloc] initWithRed:200/255.f green:200/255.f blue:200/255.f alpha:1]];
 //        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
         
         // Disable tab bar buttons
@@ -152,26 +152,8 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.spellModel.currentAlgorithm == 0) {
-        self.algorithmButton.title = @"KNN";
-    } else {
-        self.algorithmButton.title = @"SVM";
-    }
-    [self.spellModel updateModel];
-}
-
 -(void)dealloc {
     [self.cmMotionManager stopDeviceMotionUpdates];
-}
-
-- (IBAction)startStopCasting:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:@"Start Casting"]) {
-        self.casting = YES;
-    } else {
-        self.casting = NO;
-    }
 }
 
 - (IBAction)holdCastButton:(UIButton *)sender {
@@ -186,41 +168,14 @@
     self.castSpellButton.hidden = NO;
     self.castSpellButton.enabled = YES;
     [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
-//    [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
+    [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
     self.predictedSpellImageView.hidden = YES;
     self.predictedSpellNameLabel.hidden = YES;
     self.yesButton.hidden = YES;
     self.noButton.hidden = YES;
     
-    Spell* currentSpell = [self.spellModel getSpellWithName:self.lastLabel];
-    if (currentSpell) {
-        if (self.spellModel.currentAlgorithm == 0) {
-            currentSpell.totalKNN = [NSNumber numberWithInt:[currentSpell.totalKNN intValue]+1];
-        } else {
-            currentSpell.totalSVM = [NSNumber numberWithInt:[currentSpell.totalSVM intValue]+1];
-        }
-    }
-    
     if ([sender.currentTitle isEqualToString:@"Yes"]) {
         [self.spellModel sendFeatureArray:self.lastData withLabel:self.lastLabel];
-        
-        if (currentSpell) {
-            if (self.spellModel.currentAlgorithm == 0) {
-                currentSpell.correctKNN = [NSNumber numberWithInt:[currentSpell.correctKNN intValue]+1];
-            } else {
-                currentSpell.correctSVM = [NSNumber numberWithInt:[currentSpell.correctSVM intValue]+1];
-            }
-        }
-    }
-}
-
-- (IBAction)algorithmButtonClicked:(UIBarButtonItem *)sender {
-    if ([sender.title isEqualToString:@"KNN"]) {
-        self.spellModel.currentAlgorithm = 1;
-        sender.title = @"SVM";
-    } else {
-        self.spellModel.currentAlgorithm = 0;
-        sender.title = @"KNN";
     }
 }
 
@@ -292,17 +247,13 @@
 
 
 - (void)predictFeature:(NSMutableArray*)featureData {
+    [self.castSpellBackground setBackgroundColor:[[UIColor alloc] initWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1]];
+    
     // send the server new feature data and request back a prediction of the class
     
     // setup the url
-    NSString* baseURL;
-    if (self.spellModel.currentAlgorithm == 0) {
-        baseURL = [NSString stringWithFormat:@"%@/PredictOneKNN",self.spellModel.SERVER_URL];
-    } else {
-        baseURL = [NSString stringWithFormat:@"%@/PredictOneSVM",self.spellModel.SERVER_URL];
-    }
+    NSString* baseURL = [NSString stringWithFormat:@"%@/PredictOneSVM",self.spellModel.SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
     
     // data to send in body of post request (send arguments as json)
     NSError *error = nil;
@@ -339,7 +290,7 @@
                          self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", labelResponse];
                          self.predictedSpellImageView.image = [UIImage imageNamed:labelResponse];
                      } else {
-                         [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
+                         [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                          self.castSpellButton.enabled = YES;
                          [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Spell not found"

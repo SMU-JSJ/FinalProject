@@ -81,8 +81,7 @@
     if (casting == YES) {
         self.startCastingTime = [NSDate date];
         [self.ringBuffer reset];
-        [self.castSpellButton setTitle:@"Stop Casting" forState:UIControlStateNormal];
-        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
+        [self.castSpellButton setTitle:@"Casting..." forState:UIControlStateNormal];
         
         // Disable tab bar buttons
         for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
@@ -93,13 +92,20 @@
         data[0] = [NSNumber numberWithDouble:castingTime];
         
         [self.spellModel sendFeatureArray:data withLabel:self.spell.name];
-        [self.castSpellButton setTitle:@"Start Casting" forState:UIControlStateNormal];
-        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
+        [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
         
         // Enable tab bar buttons
         for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
             [tmpTabBarItem setEnabled:YES];
     }
+}
+
+- (IBAction)holdCastButton:(UIButton *)sender {
+    self.casting = YES;
+}
+
+- (IBAction)releaseCastButton:(UIButton *)sender {
+    self.casting = NO;
 }
 
 - (void)viewDidLoad {
@@ -120,16 +126,15 @@
     }];
 }
 
--(void)dealloc{
-    [self.cmMotionManager stopDeviceMotionUpdates];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // Update the model with the new data points
+    [self.spellModel updateModel];
 }
 
-- (IBAction)startStopCasting:(UIButton *)sender {
-    if ([sender.currentTitle isEqualToString:@"Start Casting"]) {
-        self.casting = YES;
-    } else {
-        self.casting = NO;
-    }
+-(void)dealloc {
+    [self.cmMotionManager stopDeviceMotionUpdates];
 }
 
 @end
