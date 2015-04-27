@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		6847D1601AEEDED3003AD70A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D15F1AEEDED3003AD70A /* main.m */; };
-		6847D1631AEEDED3003AD70A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1621AEEDED3003AD70A /* AppDelegate.m */; };
-		6847D1661AEEDED3003AD70A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1651AEEDED3003AD70A /* ViewController.m */; };
-		6847D1691AEEDED3003AD70A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6847D1671AEEDED3003AD70A /* Main.storyboard */; };
 		6847D16B1AEEDED4003AD70A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6847D16A1AEEDED4003AD70A /* Images.xcassets */; };
 		6847D16E1AEEDED4003AD70A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6847D16C1AEEDED4003AD70A /* LaunchScreen.xib */; };
 		6847D17A1AEEDED4003AD70A /* SpellcastTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1791AEEDED4003AD70A /* SpellcastTests.m */; };
+		6847D1921AEEDF08003AD70A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1841AEEDF08003AD70A /* AppDelegate.m */; };
+		6847D1931AEEDF08003AD70A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6847D1851AEEDF08003AD70A /* Main.storyboard */; };
+		6847D1941AEEDF08003AD70A /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1871AEEDF08003AD70A /* RingBuffer.m */; };
+		6847D1951AEEDF08003AD70A /* SpellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1891AEEDF08003AD70A /* SpellModel.m */; };
+		6847D1961AEEDF08003AD70A /* Spell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18B1AEEDF08003AD70A /* Spell.m */; };
+		6847D1971AEEDF08003AD70A /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */; };
+		6847D1981AEEDF08003AD70A /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18F1AEEDF08003AD70A /* TrainingViewController.m */; };
+		6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1911AEEDF08003AD70A /* TestingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,16 +35,26 @@
 		6847D15A1AEEDED3003AD70A /* Spellcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spellcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6847D15E1AEEDED3003AD70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6847D15F1AEEDED3003AD70A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6847D1611AEEDED3003AD70A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6847D1621AEEDED3003AD70A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6847D1641AEEDED3003AD70A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6847D1651AEEDED3003AD70A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6847D1681AEEDED3003AD70A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6847D16A1AEEDED4003AD70A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6847D16D1AEEDED4003AD70A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		6847D1731AEEDED4003AD70A /* SpellcastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpellcastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6847D1781AEEDED4003AD70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6847D1791AEEDED4003AD70A /* SpellcastTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpellcastTests.m; sourceTree = "<group>"; };
+		6847D1831AEEDF08003AD70A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6847D1841AEEDF08003AD70A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6847D1851AEEDF08003AD70A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6847D1861AEEDF08003AD70A /* RingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RingBuffer.h; sourceTree = "<group>"; };
+		6847D1871AEEDF08003AD70A /* RingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RingBuffer.m; sourceTree = "<group>"; };
+		6847D1881AEEDF08003AD70A /* SpellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpellModel.h; sourceTree = "<group>"; };
+		6847D1891AEEDF08003AD70A /* SpellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellModel.m; sourceTree = "<group>"; };
+		6847D18A1AEEDF08003AD70A /* Spell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spell.h; sourceTree = "<group>"; };
+		6847D18B1AEEDF08003AD70A /* Spell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spell.m; sourceTree = "<group>"; };
+		6847D18C1AEEDF08003AD70A /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
+		6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
+		6847D18E1AEEDF08003AD70A /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
+		6847D18F1AEEDF08003AD70A /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
+		6847D1901AEEDF08003AD70A /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
+		6847D1911AEEDF08003AD70A /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +96,21 @@
 		6847D15C1AEEDED3003AD70A /* Spellcast */ = {
 			isa = PBXGroup;
 			children = (
-				6847D1611AEEDED3003AD70A /* AppDelegate.h */,
-				6847D1621AEEDED3003AD70A /* AppDelegate.m */,
-				6847D1641AEEDED3003AD70A /* ViewController.h */,
-				6847D1651AEEDED3003AD70A /* ViewController.m */,
-				6847D1671AEEDED3003AD70A /* Main.storyboard */,
+				6847D1831AEEDF08003AD70A /* AppDelegate.h */,
+				6847D1841AEEDF08003AD70A /* AppDelegate.m */,
+				6847D1851AEEDF08003AD70A /* Main.storyboard */,
+				6847D1861AEEDF08003AD70A /* RingBuffer.h */,
+				6847D1871AEEDF08003AD70A /* RingBuffer.m */,
+				6847D1881AEEDF08003AD70A /* SpellModel.h */,
+				6847D1891AEEDF08003AD70A /* SpellModel.m */,
+				6847D18A1AEEDF08003AD70A /* Spell.h */,
+				6847D18B1AEEDF08003AD70A /* Spell.m */,
+				6847D18C1AEEDF08003AD70A /* TrainingTableViewController.h */,
+				6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */,
+				6847D18E1AEEDF08003AD70A /* TrainingViewController.h */,
+				6847D18F1AEEDF08003AD70A /* TrainingViewController.m */,
+				6847D1901AEEDF08003AD70A /* TestingViewController.h */,
+				6847D1911AEEDF08003AD70A /* TestingViewController.m */,
 				6847D16A1AEEDED4003AD70A /* Images.xcassets */,
 				6847D16C1AEEDED4003AD70A /* LaunchScreen.xib */,
 				6847D15D1AEEDED3003AD70A /* Supporting Files */,
@@ -168,6 +193,7 @@
 				TargetAttributes = {
 					6847D1591AEEDED3003AD70A = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 83U7U2U9D6;
 					};
 					6847D1721AEEDED4003AD70A = {
 						CreatedOnToolsVersion = 6.3;
@@ -199,7 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6847D1691AEEDED3003AD70A /* Main.storyboard in Resources */,
+				6847D1931AEEDF08003AD70A /* Main.storyboard in Resources */,
 				6847D16E1AEEDED4003AD70A /* LaunchScreen.xib in Resources */,
 				6847D16B1AEEDED4003AD70A /* Images.xcassets in Resources */,
 			);
@@ -219,9 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6847D1661AEEDED3003AD70A /* ViewController.m in Sources */,
-				6847D1631AEEDED3003AD70A /* AppDelegate.m in Sources */,
+				6847D1951AEEDF08003AD70A /* SpellModel.m in Sources */,
+				6847D1961AEEDF08003AD70A /* Spell.m in Sources */,
+				6847D1921AEEDF08003AD70A /* AppDelegate.m in Sources */,
 				6847D1601AEEDED3003AD70A /* main.m in Sources */,
+				6847D1981AEEDF08003AD70A /* TrainingViewController.m in Sources */,
+				6847D1941AEEDF08003AD70A /* RingBuffer.m in Sources */,
+				6847D1971AEEDF08003AD70A /* TrainingTableViewController.m in Sources */,
+				6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +275,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6847D1671AEEDED3003AD70A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6847D1681AEEDED3003AD70A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6847D16C1AEEDED4003AD70A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -349,6 +372,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Spellcast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Spellcast/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -418,6 +443,7 @@
 				6847D17F1AEEDED4003AD70A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6847D1801AEEDED4003AD70A /* Build configuration list for PBXNativeTarget "SpellcastTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +452,7 @@
 				6847D1821AEEDED4003AD70A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
