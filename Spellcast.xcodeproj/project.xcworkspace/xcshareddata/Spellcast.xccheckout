@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>FBF64F7C-DEFC-4615-8E5C-924F7297F3EB</string>
+	<string>8070AFC6-0F54-4479-9CF8-3C52B15445A4</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Spellcast</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E18CB677E208A0B4D7AF1D62A95100A8D28DB5AF</key>
 		<string>https://github.com/SMU-JSJ/FinalProject.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Spellcast.xcodeproj</string>
+	<string>Spellcast.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E18CB677E208A0B4D7AF1D62A95100A8D28DB5AF</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>E18CB677E208A0B4D7AF1D62A95100A8D28DB5AF</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Final%20Project</string>
+			<string>Spellcast</string>
 		</dict>
 	</array>
 </dict>
