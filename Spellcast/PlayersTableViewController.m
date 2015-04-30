@@ -10,24 +10,38 @@
 
 @interface PlayersTableViewController ()
 
+@property (strong, nonatomic) NSMutableArray* nearbyPlayers;
+
 @end
 
 @implementation PlayersTableViewController
 
+// Lazy instantiation
+- (NSMutableArray*)nearbyPlayers {
+    if (!_nearbyPlayers) {
+        _nearbyPlayers = [[NSMutableArray alloc] init];
+    }
+    return _nearbyPlayers;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self authenticateLocalPlayer];
+    if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
+        [self authenticateLocalPlayerAndStartSearchingForNearbyPlayers];
+    } else {
+        [self startSearchingForNearbyPlayers];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self stopSearchingForNearbyPlayers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,55 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (void) authenticateLocalPlayer
-//{
-//    
-//    static BOOL gcAuthenticationCalled = NO;
-//    if (!gcAuthenticationCalled) {
-//        GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-//        
-//        void (^authenticationHandler)(UIViewController*, NSError*) = ^(UIViewController *viewController, NSError *error) {
-//            NSLog(@"Authenticating with Game Center.");
-//            GKLocalPlayer *myLocalPlayer = [GKLocalPlayer localPlayer];
-//            if (viewController != nil)
-//            {
-//                NSLog(@"Not authenticated - storing view controller.");
-//                //self.authenticationController = viewController;
-//                //_gcStatusCtrlr.loginStatus.text = @"Not Logged In - Touch to Connect.";
-//            }
-//            else if ([myLocalPlayer isAuthenticated])
-//            {
-//                NSLog(@"Player is authenticated!");
-//                
-//                [localPlayer unregisterAllListeners];
-//                [localPlayer registerListener:self];
-//                
-//                //_gcStatusCtrlr.loginStatus.text = @"Game Center Connected.  Touch to search for players.";
-//                
-//                [self toggleSearchingForPlayers];
-//            }
-//            else
-//            {
-//                //Authentication failed.
-//                //self.authenticationController = nil;
-//                if (error) {
-//                    NSLog([error description], nil);
-//                }
-//                //_gcStatusCtrlr.loginStatus.text = @"Login Failed - cancelled by user.";
-//            }
-//            
-//            
-//        };
-//        
-//        localPlayer.authenticateHandler = authenticationHandler;
-//        gcAuthenticationCalled = YES;
-//    }
-//    
-//}
-
-- (void) authenticateLocalPlayer
-{
-    
+- (void) authenticateLocalPlayerAndStartSearchingForNearbyPlayers {
     static BOOL gcAuthenticationCalled = NO;
     if (!gcAuthenticationCalled) {
         GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
@@ -91,54 +57,19 @@
         void (^authenticationHandler)(UIViewController*, NSError*) = ^(UIViewController *viewController, NSError *error) {
             NSLog(@"Authenticating with Game Center.");
             GKLocalPlayer *myLocalPlayer = [GKLocalPlayer localPlayer];
-            if (viewController != nil)
-            {
+            if (viewController != nil) {
                 NSLog(@"Not authenticated - storing view controller.");
                 //self.authenticationController = viewController;
-            }
-            else if ([myLocalPlayer isAuthenticated])
-            {
+            } else if ([myLocalPlayer isAuthenticated]) {
                 NSLog(@"Player is authenticated!");
                 
                 //iOS8 - register as a listener
                 [localPlayer unregisterAllListeners];
                 [localPlayer registerListener:self];
                 
-                [[GKLocalPlayer localPlayer] loadFriendPlayersWithCompletionHandler:^(NSArray *friendPlayers, NSError *error) {
-                    
-                    //Do something with the friends
-                    
-                }];
-//                
-//                //iOS7 - install an invitation handler
-//                [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
-//                    // Insert game-specific code here to clean up any game in progress.
-//                    if (acceptedInvite)
-//                    {
-//                        //This player accepted an invitation.
-//                        //If doing programmatic matchmaking, call GKMatchmaker's matchForInvite:completionHandler
-//                        //to get a match for the invite.  Otherwise you need to allocate a GKMatchmakerViewController
-//                        //instance and present it with the invite.
-//                        
-//                    }
-//                    else if (playersToInvite)
-//                    {
-//                        //Your game was launched from the GameCenter app to host a match.
-//                    }
-//                };
+                [self startSearchingForNearbyPlayers];
                 
-                //Now you can browse.  Note this is the iOS8 call.  The iOS7 call is slightly different.
-                [[GKMatchmaker sharedMatchmaker] startBrowsingForNearbyPlayersWithHandler:^(GKPlayer *player, BOOL reachable) {
-                    
-                    NSLog(@"Player Nearby: %@", player.playerID);
-                    
-                }];
-                
-                
-                
-            }
-            else
-            {
+            } else {
                 //Authentication failed.
                 //self.authenticationController = nil;
                 if (error) {
@@ -154,50 +85,25 @@
     }
 }
 
--(void)toggleSearchingForPlayers {
-    NSLog(@"Browsing for nearby players...");
+- (void)startSearchingForNearbyPlayers {
     [[GKMatchmaker sharedMatchmaker] startBrowsingForNearbyPlayersWithHandler:^(GKPlayer *player, BOOL reachable) {
         
-        if (reachable) {
-            //[_nearbyPlayers addObject:player];
-            NSLog(@"Player %@ is reachable", player.playerID);
-        }
-        else {
-            //[_nearbyPlayers removeObject:player];
-            NSLog(@"Player %@ is not reachable", player.playerID);
+        if (reachable && ![self.nearbyPlayers containsObject:player]) {
+            NSLog(@"Player %@ is reachable", player.displayName);
+            
+            [self.nearbyPlayers addObject:player];
+        } else if (!reachable && [self.nearbyPlayers containsObject:player]){
+            NSLog(@"Player %@ is not reachable", player.displayName);
+            
+            [self.nearbyPlayers removeObject:player];
         }
         
-        //[_gcStatusCtrlr updateStatus];
-        
+        [self.tableView reloadData];
     }];
-    
-//    if (!_browsingForPlayers) {
-//        //Start searching for players
-//        
-//        NSLog(@"Browsing for nearby players...");
-//        [[GKMatchmaker sharedMatchmaker] startBrowsingForNearbyPlayersWithHandler:^(GKPlayer *player, BOOL reachable) {
-//            
-//            NSLog(@"Player Nearby: %@", player.playerID);
-//            if (reachable) {
-//                [_nearbyPlayers addObject:player];
-//            }
-//            else {
-//                [_nearbyPlayers removeObject:player];
-//            }
-//            
-//            [_gcStatusCtrlr updateStatus];
-//            
-//        }];
-//    }
-//    else {
-//        NSLog(@"No longer browsing for nearby players.");
-//        [[GKMatchmaker sharedMatchmaker] stopBrowsingForNearbyPlayers];
-//        [_nearbyPlayers removeAllObjects];
-//    }
-//    
-//    self.browsingForPlayers = !_browsingForPlayers;
-//    
-//    [_gcStatusCtrlr updateStatus];
+}
+
+- (void)stopSearchingForNearbyPlayers {
+    [[GKMatchmaker sharedMatchmaker] stopBrowsingForNearbyPlayers];
 }
 
 #pragma mark GKInviteEventListenerProtocol methods
@@ -226,26 +132,25 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.nearbyPlayers count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlayerCell" forIndexPath:indexPath];
+    
+    GKPlayer* player = [self.nearbyPlayers objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    cell.textLabel.text = player.displayName;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
