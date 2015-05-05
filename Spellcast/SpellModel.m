@@ -70,15 +70,19 @@
     if(!_attackSpells) {
         _attackSpells = [[NSMutableArray alloc] init];
         
-        NSArray* spellNames = @[@"Creo Leonem", @"Percutio Cum Fulmini"];
-        NSArray* spellTranslations = @[@"Conjure Lion", @"Lightning Strike"];
-        NSArray* spellDescriptions = @[@"Conjures a lion and attacks the opponent.",
-                                       @"Strikes a lightning bolt at the opponent."];
+        NSArray* spellNames = @[@"Percutio Cum Fulmini", @"Creo Leonem"];
+        NSArray* spellTranslations = @[@"Lightning Strike", @"Conjure Lion"];
+        NSArray* spellDescriptions = @[@"Strikes a lightning bolt at the opponent.",
+                                       @"Conjures a lion and attacks the opponent."];
+        NSArray* spellStrengths = @[@10, @20];
+        NSArray* spellCosts = @[@5, @10];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
-                                               desc:spellDescriptions[i]];
+                                               desc:spellDescriptions[i]
+                                           strength:spellStrengths[i]
+                                               cost:spellCosts[i]];
             [self.attackSpells addObject:spell];
         }
     }
@@ -99,11 +103,15 @@
         NSArray* spellDescriptions = @[@"Heals the user's body.",
                                        @"Restores the user's spent magic.",
                                        @"Heals the user's mind."];
+        NSArray* spellStrengths = @[@5, @10, @15];
+        NSArray* spellCosts = @[@5, @1, @10];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
-                                               desc:spellDescriptions[i]];
+                                               desc:spellDescriptions[i]
+                                           strength:spellStrengths[i]
+                                               cost:spellCosts[i]];
             [self.healingSpells addObject:spell];
         }
     }
@@ -121,11 +129,15 @@
         NSArray* spellTranslations = @[@"Wall of Earth", @"Soul Shield"];
         NSArray* spellDescriptions = @[@"Invokes a wall of earth to block attacks.",
                                        @"Shields the user's soul for opponents."];
+        NSArray* spellStrengths = @[@10, @15];
+        NSArray* spellCosts = @[@5, @10];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
-                                               desc:spellDescriptions[i]];
+                                               desc:spellDescriptions[i]
+                                           strength:spellStrengths[i]
+                                               cost:spellCosts[i]];
             [self.defenseSpells addObject:spell];
         }
     }

@@ -140,14 +140,6 @@
         [_ringBuffer addNewData:motion.userAcceleration.x
                           withY:motion.userAcceleration.y
                           withZ:motion.userAcceleration.z];
-        //NSLog(@"here");
-        //float mag = fabs(motion.userAcceleration.x)+fabs(motion.userAcceleration.y)+fabs(motion.userAcceleration.z);
-        
-        //        if (self.casting){ // do this and return immediately
-        //            [self.backQueue addOperationWithBlock:^{
-        //                [self motionEventOccurred];
-        //            }];
-        //        }
     }];
 
 }
@@ -274,25 +266,28 @@
              if(!error){
                  NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                  
-                 NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
-                 labelResponse = [[labelResponse substringToIndex:[labelResponse length] - 2] substringFromIndex:3];
-                 self.lastLabel = labelResponse;
-                 NSLog(@"%@",labelResponse);
+                 NSString *name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+                 name = [[name substringToIndex:[name length] - 2] substringFromIndex:3];
+                 self.lastLabel = name;
+                 
+                 double accuracy = [[responseData objectForKey:name] doubleValue];
+                 
+                 NSLog(@"Name = %@, Accuracy = %f", name, accuracy);
                  
                  dispatch_async(dispatch_get_main_queue(), ^{
-                     if ([self.spellModel getSpellWithName:labelResponse]) {
+                     if ([self.spellModel getSpellWithName:name]) {
                          self.castSpellButton.hidden = YES;
                          self.predictedSpellImageView.hidden = NO;
                          self.predictedSpellNameLabel.hidden = NO;
                          self.yesButton.hidden = NO;
                          self.noButton.hidden = NO;
                          
-                         self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", labelResponse];
-                         self.predictedSpellImageView.image = [UIImage imageNamed:labelResponse];
+                         self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", name];
+                         self.predictedSpellImageView.image = [UIImage imageNamed:name];
                      } else {
                          [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                          self.castSpellButton.enabled = YES;
-                         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:67/255.f green:212/255.f blue:89/255.f alpha:1] forState:UIControlStateNormal];
+                         [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Spell not found"
                                                                          message:@"Please train more."
                                                                         delegate:nil

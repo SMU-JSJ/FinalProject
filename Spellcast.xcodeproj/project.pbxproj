@@ -21,6 +21,8 @@
 		6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1911AEEDF08003AD70A /* TestingViewController.m */; };
 		68E235A61AEFF4640041AB42 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E235A51AEFF4640041AB42 /* GameKit.framework */; };
 		EFB9C7CA1AEFEB1C00D63AFA /* PlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9C7C91AEFEB1C00D63AFA /* PlayersTableViewController.m */; };
+		EFB9C7D01AF90CED00D63AFA /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9C7CF1AF90CED00D63AFA /* DuelViewController.m */; };
+		EFB9C7D31AF95C1D00D63AFA /* MatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9C7D21AF95C1D00D63AFA /* MatchModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		68E235A51AEFF4640041AB42 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EFB9C7C81AEFEB1C00D63AFA /* PlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayersTableViewController.h; sourceTree = "<group>"; };
 		EFB9C7C91AEFEB1C00D63AFA /* PlayersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayersTableViewController.m; sourceTree = "<group>"; };
+		EFB9C7CE1AF90CED00D63AFA /* DuelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DuelViewController.h; sourceTree = "<group>"; };
+		EFB9C7CF1AF90CED00D63AFA /* DuelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DuelViewController.m; sourceTree = "<group>"; };
+		EFB9C7D11AF95C1D00D63AFA /* MatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchModel.h; sourceTree = "<group>"; };
+		EFB9C7D21AF95C1D00D63AFA /* MatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +114,12 @@
 				6847D1851AEEDF08003AD70A /* Main.storyboard */,
 				EFB9C7C81AEFEB1C00D63AFA /* PlayersTableViewController.h */,
 				EFB9C7C91AEFEB1C00D63AFA /* PlayersTableViewController.m */,
-				6847D1861AEEDF08003AD70A /* RingBuffer.h */,
-				6847D1871AEEDF08003AD70A /* RingBuffer.m */,
+				EFB9C7D11AF95C1D00D63AFA /* MatchModel.h */,
+				EFB9C7D21AF95C1D00D63AFA /* MatchModel.m */,
 				6847D1881AEEDF08003AD70A /* SpellModel.h */,
 				6847D1891AEEDF08003AD70A /* SpellModel.m */,
+				6847D1861AEEDF08003AD70A /* RingBuffer.h */,
+				6847D1871AEEDF08003AD70A /* RingBuffer.m */,
 				6847D18A1AEEDF08003AD70A /* Spell.h */,
 				6847D18B1AEEDF08003AD70A /* Spell.m */,
 				6847D18C1AEEDF08003AD70A /* TrainingTableViewController.h */,
@@ -120,6 +128,8 @@
 				6847D18F1AEEDF08003AD70A /* TrainingViewController.m */,
 				6847D1901AEEDF08003AD70A /* TestingViewController.h */,
 				6847D1911AEEDF08003AD70A /* TestingViewController.m */,
+				EFB9C7CE1AF90CED00D63AFA /* DuelViewController.h */,
+				EFB9C7CF1AF90CED00D63AFA /* DuelViewController.m */,
 				6847D16A1AEEDED4003AD70A /* Images.xcassets */,
 				6847D16C1AEEDED4003AD70A /* LaunchScreen.xib */,
 				6847D15D1AEEDED3003AD70A /* Supporting Files */,
@@ -265,8 +275,10 @@
 				6847D1601AEEDED3003AD70A /* main.m in Sources */,
 				6847D1981AEEDF08003AD70A /* TrainingViewController.m in Sources */,
 				6847D1941AEEDF08003AD70A /* RingBuffer.m in Sources */,
+				EFB9C7D31AF95C1D00D63AFA /* MatchModel.m in Sources */,
 				EFB9C7CA1AEFEB1C00D63AFA /* PlayersTableViewController.m in Sources */,
 				6847D1971AEEDF08003AD70A /* TrainingTableViewController.m in Sources */,
+				EFB9C7D01AF90CED00D63AFA /* DuelViewController.m in Sources */,
 				6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,13 +7,12 @@
 //
 
 #import "PlayersTableViewController.h"
+#import "DuelViewController.h"
 
 @interface PlayersTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray* nearbyPlayers;
-@property (strong, nonatomic) GKMatch* match;
-@property (nonatomic) BOOL matchStarted;
-@property (nonatomic) BOOL sentInitialResponse;
+@property (strong, nonatomic) MatchModel* matchModel;
 
 @end
 
@@ -25,6 +24,14 @@
         _nearbyPlayers = [[NSMutableArray alloc] init];
     }
     return _nearbyPlayers;
+}
+
+// Gets an instance of the MatchModel class using lazy instantiation
+- (MatchModel*) matchModel {
+    if(!_matchModel)
+        _matchModel = [MatchModel sharedInstance];
+    
+    return _matchModel;
 }
 
 - (void)viewDidLoad {
@@ -109,6 +116,7 @@
     [[GKMatchmaker sharedMatchmaker] stopBrowsingForNearbyPlayers];
 }
 
+
 - (void)invitePlayer:(GKPlayer*)player {
     // Initialize the match request - Just targeting iOS 6 for now...
     GKMatchRequest* request = [[GKMatchRequest alloc] init];
@@ -120,98 +128,73 @@
     request.recipientResponseHandler = ^(GKPlayer *player, GKInviteRecipientResponse response) {
         if (response == GKInviteeResponseAccepted) {
             NSLog(@"Yo, they accepted the invite!");
-            [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:self.match];
+            [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:self.matchModel.match];
         }
     };
     
-    
-    [[GKMatchmaker sharedMatchmaker] findMatchForRequest:request withCompletionHandler:^(GKMatch* match, NSError *error) {
-        if (error)
-        {
-            NSLog(@"ERROR: Error makeMatch: %@", [error description] );
-            //[self disconnectMatch];
+    void (^matchCreateCompletionHandler)(GKMatch*, NSError*) = ^(GKMatch *match, NSError *error) {
+        if (error) {
+            NSLog(@"Error creating match: %@", [error description]);
+            
+            [[GKMatchmaker sharedMatchmaker] cancelPendingInviteToPlayer:player];
+            
         }
-        else if (match != nil)
-        {
-            // Record the new match and set me up as the delegate...
-            self.match = match;
-            self.match.delegate = self;
-            // There will be no players until the players accept...
+        else {
+            
+            //We have a new match object.
+            [self.matchModel updateWithMatch:match viewController:self];
+            
         }
-    }];
+    };
     
+    void (^matchAddCompletionHandler)(NSError*) = ^(NSError *error) {
+        matchCreateCompletionHandler(self.matchModel.match, error);
+    };
     
-    // This gets called when somebody accepts
-//    request.inviteeResponseHandler = ^(NSString *playerID, GKInviteeResponse response)
-//    {
-//        if (response == GKInviteeResponseAccepted)
-//        {
-//            //NSLog(@"DEBUG: Player Accepted: %@", playerID);
-//            // Tell the infrastructure we are don matching and will start using the match
-//            [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:self.MM_gameCenterCurrentMatch];
-//        }
-//    };
+    if (!self.matchModel.match) {
+        [[GKMatchmaker sharedMatchmaker] findMatchForRequest:request withCompletionHandler:matchCreateCompletionHandler];
+    }
+    else {
+        [[GKMatchmaker sharedMatchmaker] addPlayersToMatch:self.matchModel.match matchRequest:request completionHandler:matchAddCompletionHandler];
+    }
 }
 
-//- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state{
-//    switch (state)
-//    {
-//        case GKPlayerStateConnected:
-//            // Handle a new player connection.
-//            break;
-//        case GKPlayerStateDisconnected:
-//            // A player just disconnected.
-//            break;
-//        case GKPlayerStateUnknown:
-//            // Player state unknown
-//            break;
-//    }
-//    
-//    if (!self.matchStarted && match.expectedPlayerCount == 0)
-//    {
-//        self.matchStarted = YES;
-//        // Handle initial match negotiation.
-//        if (!self.sentInitialResponse)
-//        {
-//            self.sentInitialResponse = true;
-//            // Send a hello log entry
-//            [self sendMessage: @"Message from friend, 'Hello, thanks for accepting, you have connected with me'" toPlayersInMatch: [NSArray arrayWithObject:playerID]];
-//        }
-//    }
-//}
-//
-//- (void) sendMessage:(NSString*)action toPlayersInMatch:(NSArray*) playerIds{
-//    NSError* err = nil;
-//    if (![self.match sendData:[action dataUsingEncoding:NSUTF8StringEncoding] toPlayers:playerIds dataMode:GKMatchSendDataReliable error:&err])
-//    {
-//        if (err != nil)
-//        {
-//            NSLog(@"ERROR: Could not send action to players (%@): %@ (%ld) - '%@'" ,[self.match.players componentsJoinedByString:@","],[err localizedDescription],(long)[err code], action);
-//        }
-//        else
-//        {
-//            NSLog(@"ERROR: Could not send action to players (%@): null error - '%@'",[self.match.players componentsJoinedByString:@","], action);
-//        }
-//    }
-//    else
-//    {
-//        NSLog(@"DEBUG: Message sent to players (%@) - '%@'",[self.match.players componentsJoinedByString:@","], action);
-//    }
-//}
-//
-//- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID{
-//    NSString* actionString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//    // Send the initial response after we got the initial send from the
-//    // invitee...
-//    if (!self.sentInitialResponse)
-//    {
-//        self.sentInitialResponse = true;
-//        // Send a hello log entry
-//        [self sendMessage: @"Message from friend, 'Hello, thanks for inviting, you have connected with %@'" toPlayersInMatch: [NSArray arrayWithObject:playerID]];
-//    }
-//    // Execute the action we were sent...
-//    NSLog(@"%@", actionString);
-//}
+-(void)startDuel {
+    NSLog(@"Starting duel...");
+    [self performSegueWithIdentifier:@"DuelSegue" sender:self];
+    
+}
+
+#pragma mark GKMatchDelegate methods
+- (void)match:(GKMatch *)match didFailWithError:(NSError *)error {
+    NSLog(@"MATCH FAILED: %@", [error description]);
+    
+}
+
+- (void)match:(GKMatch *)match
+       player:(GKPlayer *)player
+didChangeConnectionState:(GKPlayerConnectionState)state {
+    
+    NSLog(@"PLAYER CHANGED STATE: %@", [self.matchModel nameForPlayerState:state]);
+    NSLog(@"Change Players: %@", self.matchModel.match.players);
+    
+    if (match.players.count == 0)
+        [self.matchModel endMatch];
+    else {
+        [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:match];
+        [self.matchModel sendMessage:@{@"command":@"start"} toPlayersInMatch:self.matchModel.match.players];
+    }
+}
+
+-(void)match:(GKMatch *)match didReceiveData:(NSData *)data fromRemotePlayer:(GKPlayer *)player {
+    NSDictionary* message = (NSDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    //NSString* message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Received '%@' from %@", message, player.displayName);
+    
+    if ([[message objectForKey:@"command"] isEqualToString:@"start"]) {
+        [self startDuel];
+    }
+}
 
 
 #pragma mark GKInviteEventListenerProtocol methods
@@ -230,9 +213,9 @@
         }
         else {
             
-            //[self updateWithMatch:match];
-            self.match = match;
-            NSLog(@"Players: %@",self.match.players);
+            [self.matchModel updateWithMatch:match viewController:self];
+            //self.match = match;
+//            NSLog(@"Players: %@",self.match.players);
         }
     }];
     

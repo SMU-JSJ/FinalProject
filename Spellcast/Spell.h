@@ -13,7 +13,9 @@
 // Constructor/initializer for a spell
 - (id) initSpell:(NSString*) name
      translation:(NSString*) translation
-            desc:(NSString*) desc;
+            desc:(NSString*) desc
+        strength:(NSNumber*) strength
+            cost:(NSNumber*) cost;
 
 // The Latin name of the spell
 @property (strong, nonatomic) NSString* name;
@@ -21,16 +23,10 @@
 @property (strong, nonatomic) NSString* translation;
 // The description of the spell
 @property (strong, nonatomic) NSString* desc;
-
-// Counts of correct predictions and total predictions for this spell using
-// either the KNN or SVM algorithm
-@property (strong, nonatomic) NSNumber* correctKNN;
-@property (strong, nonatomic) NSNumber* totalKNN;
-@property (strong, nonatomic) NSNumber* correctSVM;
-@property (strong, nonatomic) NSNumber* totalSVM;
-
-// Function for getting the prediction accuracy of this spell under a certain algorithm
-- (double)getAccuracy:(NSInteger)algorithm;
+// The maximum number of defense/healing/attack points the spell is worth
+@property (strong, nonatomic) NSNumber* strength;
+// The amount of magic points a spell costs
+@property (strong, nonatomic) NSNumber* cost;
 
 
 // Note: add attack/heal/defense points later (for final project)

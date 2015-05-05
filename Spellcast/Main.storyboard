@@ -364,15 +364,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Duel a Wizard" id="4sA-sX-A3M"/>
+                    <connections>
+                        <segue destination="coW-WO-eCa" kind="modal" identifier="DuelSegue" id="dhs-LB-xTd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCU-se-UaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1270" y="1682"/>
         </scene>
-        <!--View Controller-->
+        <!--Duel View Controller-->
         <scene sceneID="vc2-P8-DH9">
             <objects>
-                <viewController id="coW-WO-eCa" sceneMemberID="viewController">
+                <viewController id="coW-WO-eCa" customClass="DuelViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XN3-i1-GGA"/>
                         <viewControllerLayoutGuide type="bottom" id="yGx-oH-8dm"/>
@@ -410,7 +413,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Claudo Animum" translatesAutoresizingMaskIntoConstraints="NO" id="pEu-YW-Qey">
-                                        <rect key="frame" x="8" y="330" width="144" height="144"/>
+                                        <rect key="frame" x="8" y="295" width="144" height="144"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="144" id="SR2-Hg-UFy"/>
                                             <constraint firstAttribute="height" constant="144" id="foK-Z2-b4C"/>
@@ -464,7 +467,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="KlU-Gu-eXq">
-                                        <rect key="frame" x="8" y="330" width="144" height="144"/>
+                                        <rect key="frame" x="8" y="295" width="144" height="144"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="144" id="FMp-aE-FUG"/>
                                             <constraint firstAttribute="height" constant="144" id="pol-KQ-ZYM"/>
@@ -500,16 +503,20 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oki-9Y-tfN">
-                                <rect key="frame" x="0.0" y="503" width="320" height="65"/>
+                                <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="L8p-J9-xCc"/>
+                                    <constraint firstAttribute="height" constant="100" id="L8p-J9-xCc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="45"/>
                                 <state key="normal" title="Hold to Cast">
                                     <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="holdCastButton:" destination="coW-WO-eCa" eventType="touchDown" id="v5D-xd-Ode"/>
+                                    <action selector="releaseCastButton:" destination="coW-WO-eCa" eventType="touchUpInside" id="yLY-yS-PhI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -538,6 +545,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xzm-lC-a3e"/>
+                    <connections>
+                        <outlet property="battleLog" destination="HBU-Ec-Ti9" id="k6T-dW-1vf"/>
+                        <outlet property="castSpellButton" destination="oki-9Y-tfN" id="9Qr-V6-FZC"/>
+                        <outlet property="myHP" destination="et4-ps-cYJ" id="suh-RO-8Zu"/>
+                        <outlet property="myMana" destination="Frp-d8-7Fm" id="iDt-fV-Vne"/>
+                        <outlet property="myName" destination="sNI-dn-Iod" id="iqA-WY-e7Z"/>
+                        <outlet property="mySpell" destination="pEu-YW-Qey" id="lW1-k2-BRZ"/>
+                        <outlet property="theirHP" destination="0hq-YA-adD" id="QJ5-Rh-rG9"/>
+                        <outlet property="theirMana" destination="RNi-aY-HI5" id="TVI-Yv-hJX"/>
+                        <outlet property="theirName" destination="Ezz-30-zCs" id="yW3-rT-mhb"/>
+                        <outlet property="theirSpell" destination="KlU-Gu-eXq" id="SVD-QY-frH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cxJ-RZ-U8l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

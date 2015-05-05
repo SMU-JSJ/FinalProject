@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GameKit/GameKit.h>
+#import "MatchModel.h"
 
 @interface PlayersTableViewController : UITableViewController <GKMatchDelegate, GKLocalPlayerListener>
 
