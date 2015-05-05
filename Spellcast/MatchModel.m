@@ -28,6 +28,14 @@
     self.match.delegate = viewController;
 }
 
+- (void)updateWithMatch:(GKMatch*)match {
+    self.match = match;
+}
+
+- (void)updateWithViewController:(id<GKMatchDelegate>)viewController {
+    self.match.delegate = viewController;
+}
+
 -(void)endMatch {
     [self.match disconnect];
     self.match = nil;
@@ -64,6 +72,14 @@
             
         default:
             break;
+    }
+}
+
+-(BOOL)isMatchRunning {
+    if (self.match != nil && [self.match.players count] > 0) {
+        return true;
+    } else {
+        return false;
     }
 }
 

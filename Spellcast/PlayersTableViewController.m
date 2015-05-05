@@ -41,6 +41,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    NSLog(@"viewWillAppear");
+    
+    [self.matchModel updateWithViewController:self];
+    
     if (![[GKLocalPlayer localPlayer] isAuthenticated]) {
         [self authenticateLocalPlayerAndStartSearchingForNearbyPlayers];
     } else {
@@ -178,9 +182,11 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     NSLog(@"PLAYER CHANGED STATE: %@", [self.matchModel nameForPlayerState:state]);
     NSLog(@"Change Players: %@", self.matchModel.match.players);
     
-    if (match.players.count == 0)
+    if (![self.matchModel isMatchRunning]) {
+    //if (match.players.count == 0) {
+        NSLog(@"hi");
         [self.matchModel endMatch];
-    else {
+    } else {
         [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:match];
         [self.matchModel sendMessage:@{@"command":@"start"} toPlayersInMatch:self.matchModel.match.players];
     }
@@ -206,6 +212,7 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     
     [[GKMatchmaker sharedMatchmaker] matchForInvite:invite completionHandler:^(GKMatch *match, NSError *error) {
         
+        NSLog(@"didAcceptInvite");
         if (error) {
             NSLog(@"Error creating match from invitation: %@", [error description]);
             //Tell ViewController that match connect failed.
@@ -214,8 +221,6 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
         else {
             
             [self.matchModel updateWithMatch:match viewController:self];
-            //self.match = match;
-//            NSLog(@"Players: %@",self.match.players);
         }
     }];
     

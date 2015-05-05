@@ -25,6 +25,7 @@
 @property (strong,nonatomic) NSNumber *dsid;
 
 @property (strong, nonatomic) SpellModel* spellModel;
+@property (strong, nonatomic) MatchModel* matchModel;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *myHP;
 @property (weak, nonatomic) IBOutlet UIProgressView *myMana;
@@ -52,6 +53,14 @@
         _spellModel = [SpellModel sharedInstance];
     
     return _spellModel;
+}
+
+// Gets an instance of the MatchModel class using lazy instantiation
+- (MatchModel*) matchModel {
+    if(!_matchModel)
+        _matchModel = [MatchModel sharedInstance];
+    
+    return _matchModel;
 }
 
 -(CMMotionManager*)cmMotionManager{
@@ -110,8 +119,14 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //if (
-    //[self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.matchModel updateWithViewController:self];
+    
+    if (![self.matchModel isMatchRunning]) {
+        NSLog(@"end match");
+        [self.matchModel endMatch];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -190,7 +205,7 @@
                      self.mySpell.image = [UIImage imageNamed:name];
                  } else {
                      // Spell was not found or was not accurate enough
-                     self.mySpell.image = nil;
+                     self.mySpell.image = [UIImage imageNamed:@"question"];
                  }
                  
                  [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
@@ -218,6 +233,36 @@
 - (IBAction)releaseCastButton:(UIButton *)sender {
     self.casting = NO;
 }
+
+#pragma mark GKMatchDelegate methods
+- (void)match:(GKMatch *)match didFailWithError:(NSError *)error {
+    NSLog(@"MATCH FAILED: %@", [error description]);
+    
+}
+
+- (void)match:(GKMatch *)match
+       player:(GKPlayer *)player
+didChangeConnectionState:(GKPlayerConnectionState)state {
+    
+    NSLog(@"PLAYER CHANGED STATE: %@", [self.matchModel nameForPlayerState:state]);
+    NSLog(@"Change Players: %@", self.matchModel.match.players);
+    
+    if (![self.matchModel isMatchRunning]) {
+        NSLog(@"end match");
+        [self.matchModel endMatch];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void)match:(GKMatch *)match didReceiveData:(NSData *)data fromRemotePlayer:(GKPlayer *)player {
+    NSDictionary* message = (NSDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSLog(@"Received '%@' from %@", message, player.displayName);
+//    
+//    if ([[message objectForKey:@"command"] isEqualToString:@"start"]) {
+//        [self startDuel];
+//    }
+}
+
 
 /*
 #pragma mark - Navigation

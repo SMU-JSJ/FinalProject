@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MatchModel.h"
 
-@interface DuelViewController : UIViewController
+@interface DuelViewController : UIViewController <GKMatchDelegate>
 
 @end

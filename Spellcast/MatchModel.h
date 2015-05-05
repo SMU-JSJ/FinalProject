@@ -16,8 +16,11 @@
 @property (strong, nonatomic) GKMatch* match;
 
 -(void)updateWithMatch:(GKMatch*)match viewController:(id<GKMatchDelegate>)viewController;
+-(void)updateWithMatch:(GKMatch*)match;
+-(void)updateWithViewController:(id<GKMatchDelegate>)viewController;
 -(void)endMatch;
 -(void)sendMessage:(NSDictionary*)message toPlayersInMatch:(NSArray*)players;
 -(NSString*)nameForPlayerState:(GKPlayerConnectionState)state;
+-(BOOL)isMatchRunning;
 
 @end
