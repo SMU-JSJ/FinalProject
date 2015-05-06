@@ -31,17 +31,21 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *myMana;
 @property (weak, nonatomic) IBOutlet UILabel *myName;
 @property (weak, nonatomic) IBOutlet UIImageView *mySpell;
+@property (nonatomic) float myDefense;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *theirHP;
 @property (weak, nonatomic) IBOutlet UIProgressView *theirMana;
 @property (weak, nonatomic) IBOutlet UILabel *theirName;
 @property (weak, nonatomic) IBOutlet UIImageView *theirSpell;
+@property (nonatomic) float theirDefense;
 
-@property (weak, nonatomic) IBOutlet UILabel *battleLog;
+@property (weak, nonatomic) IBOutlet UITextView *battleLog;
 
 @property (weak, nonatomic) IBOutlet UIButton *castSpellButton;
 @property (strong, nonatomic) NSDate *startCastingTime;
 @property (nonatomic) BOOL casting;
+
+@property (strong, nonatomic) NSTimer *manaTimer;
 
 @end
 
@@ -127,6 +131,18 @@
         [self.matchModel endMatch];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    //Set the opponent's display name.
+    GKPlayer* player = self.matchModel.match.players[0];
+    NSString* playerName = player.displayName;
+    playerName = [[playerName substringToIndex:[playerName length] - 1] substringFromIndex:2];
+    self.theirName.text = playerName;
+    [self createTimer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.manaTimer invalidate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -165,6 +181,142 @@
     }
 }
 
+- (void)createTimer {
+    if ([self.manaTimer isValid]) {
+        [self.manaTimer invalidate];
+    }
+    
+    // Call the function to increment the mana every second.
+    self.manaTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                       target:self
+                                                     selector:@selector(incrementMana)
+                                                     userInfo:nil
+                                                      repeats:YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.manaTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)incrementMana {
+    if (self.myMana.progress - 0.01 >= 0.01 ) {
+        self.myMana.progress = self.myMana.progress - 0.01;
+    } else {
+        self.myMana.progress = 0.0;
+    }
+    
+    if (self.theirMana.progress + 0.01 <= 1 ) {
+        self.theirMana.progress = self.theirMana.progress + 0.01;
+    } else {
+        self.theirMana.progress = 1.0;
+    }
+}
+
+- (void)handleSpellCast:(NSString*)spellName spellAccuracy:(NSNumber*)spellAccuracy caster:(int)caster {
+    Spell* spell = [self.spellModel getSpellWithName:spellName];
+    float finalStrength = ([spell.strength floatValue]*[spellAccuracy floatValue])/100.0;
+    float cost = [spell.cost floatValue]/100.0;
+    NSString* newMove;
+    UIColor* textColor;
+    UIColor* red = [UIColor redColor];
+    UIColor* green = [UIColor greenColor];
+    
+    if (caster == 0) {
+        if (self.myMana.progress + cost > 1) {
+            return;
+        }
+        self.mySpell.image = [UIImage imageNamed:spellName];
+        self.myMana.progress = self.myMana.progress + cost;
+        textColor = green;
+        
+        if (spell.type == ATTACK) {
+            float newStrength = finalStrength - self.theirDefense;
+            if (newStrength < 0) {
+                newStrength = 0;
+            }
+            
+            self.theirHP.progress = self.theirHP.progress - newStrength;
+            self.theirDefense -= (finalStrength);
+            if (self.theirDefense < 0) {
+                self.theirDefense = 0;
+            }
+            
+            textColor = red;
+            newMove = [NSString stringWithFormat:@"Enemy: -%.0f HP %@\n", newStrength*100, spellName];
+            
+        } else if (spell.type == HEALMAGIC) {
+            self.myMana.progress = self.myMana.progress - (finalStrength);
+            newMove = [NSString stringWithFormat:@"You: +%.0f Mana %@\n", finalStrength*100, spellName];
+        } else if (spell.type == HEALHEALTH) {
+            self.myHP.progress = self.myHP.progress - (finalStrength);
+            newMove = [NSString stringWithFormat:@"You: +%.0f HP %@\n", finalStrength*100, spellName];
+        }else if (spell.type == DEFEND) {
+            self.myDefense = finalStrength;
+            newMove = [NSString stringWithFormat:@"You: %.0f Defense %@\n", finalStrength*100, spellName];
+        }
+    } else {
+        if (self.theirMana.progress - cost < 0) {
+            return;
+        }
+        self.theirSpell.image = [UIImage imageNamed:spellName];
+        self.theirMana.progress = self.theirMana.progress - cost;
+        
+        textColor = red;
+        if (spell.type == ATTACK) {
+            float newStrength = finalStrength - self.theirDefense;
+            if (newStrength < 0) {
+                newStrength = 0;
+            }
+            
+            self.myHP.progress = self.myHP.progress + newStrength;
+            self.myDefense -= (finalStrength);
+            if (self.myDefense < 0) {
+                self.myDefense = 0;
+            }
+            
+            newMove = [NSString stringWithFormat:@"You: -%.0f HP %@\n", newStrength*100, spellName];
+            
+            textColor = green;
+            
+        } else if (spell.type == HEALMAGIC) {
+            self.theirMana.progress = self.theirMana.progress + (finalStrength);
+            newMove = [NSString stringWithFormat:@"Enemy: +%.0f Mana %@\n", finalStrength*100, spellName];
+        } else if (spell.type == HEALHEALTH) {
+            self.theirHP.progress = self.theirHP.progress + (finalStrength);
+            newMove = [NSString stringWithFormat:@"Enemy: +%.0f HP %@\n", finalStrength*100, spellName];
+        }else if (spell.type == DEFEND) {
+            self.theirDefense = finalStrength;
+            newMove = [NSString stringWithFormat:@"Enemy: %.0f Defense %@\n", finalStrength*100, spellName];
+        }
+    }
+    
+    
+    NSAttributedString* attributedNewMove = [[NSAttributedString alloc] initWithString:newMove attributes:@{NSForegroundColorAttributeName:textColor}];
+    [self.battleLog.textStorage appendAttributedString:attributedNewMove];
+    
+    if (self.myHP.progress == 1 || self.theirHP.progress == 0) {
+        [self matchOver];
+    }
+}
+
+- (void)matchOver {
+    [self.castSpellButton setTitle:@"Exit Match" forState:UIControlStateNormal];
+    
+    NSString* message;
+    if (self.myHP.progress == 1 && self.theirHP.progress == 0) {
+        message = @"Tie.";
+    } else if (self.myHP.progress == 1) {
+        message = @"You Lose.";
+    } else if (self.theirHP.progress == 0) {
+        message = @"You Win!";
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
+                                                    message:nil
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
+}
+
 - (void)predictFeature:(NSMutableArray*)featureData {
     [self.castSpellButton setBackgroundColor:[[UIColor alloc] initWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1]];
     
@@ -172,14 +324,14 @@
     
     // setup the url
     NSString* baseURL = [NSString stringWithFormat:@"%@/PredictOneSVM",self.spellModel.SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    NSURL* postUrl = [NSURL URLWithString:baseURL];
     
     // data to send in body of post request (send arguments as json)
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"feature":featureData,
+    NSError* error = nil;
+    NSDictionary* jsonUpload = @{@"feature":featureData,
                                  @"dsid":self.dsid};
     
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+    NSData* requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
     
     // create a custom HTTP POST request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
@@ -193,28 +345,37 @@
          if(!error) {
              NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
              
-             NSString *name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+             NSString* name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
              name = [[name substringToIndex:[name length] - 2] substringFromIndex:3];
-             double accuracy = [[responseData objectForKey:name] doubleValue];
-             NSLog(@"Name = %@, Accuracy = %f", name, accuracy);
+             NSNumber* accuracy = [responseData objectForKey:name];
+             NSLog(@"Name = %@, Accuracy = %f", name, [accuracy doubleValue]);
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  Spell *spell = [self.spellModel getSpellWithName:name];
-                 if (spell && accuracy > 0.5) {
+                 if (spell && [accuracy doubleValue] > 0.5) {
                      // Spell was found and was accurate enough
-                     self.mySpell.image = [UIImage imageNamed:name];
+                     [self.matchModel sendMessage:@{@"spellName":name, @"spellAccuracy":accuracy} toPlayersInMatch:self.matchModel.match.players];
+                     [self handleSpellCast:name spellAccuracy:accuracy caster:0];
                  } else {
                      // Spell was not found or was not accurate enough
                      self.mySpell.image = [UIImage imageNamed:@"question"];
                  }
                  
-                 [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
+                 if (![self.castSpellButton.currentTitle isEqualToString:@"Exit Match"]) {
+                     [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
+                 }
                  self.castSpellButton.enabled = YES;
                  [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
+                     
                  
              });
          } else {
              // Connection error
+             [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
+             self.castSpellButton.enabled = YES;
+             [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
+             
+             
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
                                                              message:@"Please check your Internet connection."
                                                             delegate:nil
@@ -227,11 +388,18 @@
 }
 
 - (IBAction)holdCastButton:(UIButton *)sender {
-    self.casting = YES;
+    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+        self.casting = YES;
+    }
 }
 
 - (IBAction)releaseCastButton:(UIButton *)sender {
-    self.casting = NO;
+    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+        self.casting = NO;
+    } else {
+        [self.matchModel endMatch];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark GKMatchDelegate methods
@@ -257,10 +425,8 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
 -(void)match:(GKMatch *)match didReceiveData:(NSData *)data fromRemotePlayer:(GKPlayer *)player {
     NSDictionary* message = (NSDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSLog(@"Received '%@' from %@", message, player.displayName);
-//    
-//    if ([[message objectForKey:@"command"] isEqualToString:@"start"]) {
-//        [self startDuel];
-//    }
+    
+    [self handleSpellCast:[message objectForKey:@"spellName"] spellAccuracy:[message objectForKey:@"spellAccuracy"] caster:1];
 }
 
 

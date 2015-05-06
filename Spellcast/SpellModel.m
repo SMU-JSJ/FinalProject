@@ -81,6 +81,7 @@
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
                                                desc:spellDescriptions[i]
+                                               type: ATTACK
                                            strength:spellStrengths[i]
                                                cost:spellCosts[i]];
             [self.attackSpells addObject:spell];
@@ -103,6 +104,9 @@
         NSArray* spellDescriptions = @[@"Heals the user's body.",
                                        @"Restores the user's spent magic.",
                                        @"Heals the user's mind."];
+        NSArray* spellTypes = @[[NSNumber numberWithInt:HEALHEALTH],
+                               [NSNumber numberWithInt:HEALMAGIC],
+                               [NSNumber numberWithInt:HEALHEALTH]];
         NSArray* spellStrengths = @[@5, @10, @15];
         NSArray* spellCosts = @[@5, @1, @10];
         
@@ -110,6 +114,7 @@
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
                                                desc:spellDescriptions[i]
+                                               type: [spellTypes[i] intValue]
                                            strength:spellStrengths[i]
                                                cost:spellCosts[i]];
             [self.healingSpells addObject:spell];
@@ -136,6 +141,7 @@
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
                                         translation:spellTranslations[i]
                                                desc:spellDescriptions[i]
+                                               type: DEFEND
                                            strength:spellStrengths[i]
                                                cost:spellCosts[i]];
             [self.defenseSpells addObject:spell];

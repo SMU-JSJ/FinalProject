@@ -14,6 +14,7 @@
 - (id) initSpell:(NSString*) name
      translation:(NSString*) translation
             desc:(NSString*) desc
+            type:(SpellTypeState) type
         strength:(NSNumber*) strength
             cost:(NSNumber*) cost
 {
@@ -24,6 +25,7 @@
         self.name = name;
         self.translation = translation;
         self.desc = desc;
+        self.type = type;
         self.strength = strength;
         self.cost = cost;
     }

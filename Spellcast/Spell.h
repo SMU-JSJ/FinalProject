@@ -14,8 +14,16 @@
 - (id) initSpell:(NSString*) name
      translation:(NSString*) translation
             desc:(NSString*) desc
+            type:(int) type
         strength:(NSNumber*) strength
             cost:(NSNumber*) cost;
+
+typedef enum spellTypeState {
+    ATTACK,
+    HEALMAGIC,
+    HEALHEALTH,
+    DEFEND
+} SpellTypeState;
 
 // The Latin name of the spell
 @property (strong, nonatomic) NSString* name;
@@ -23,12 +31,13 @@
 @property (strong, nonatomic) NSString* translation;
 // The description of the spell
 @property (strong, nonatomic) NSString* desc;
+// The type of the spell
+@property (nonatomic) SpellTypeState type;
 // The maximum number of defense/healing/attack points the spell is worth
 @property (strong, nonatomic) NSNumber* strength;
 // The amount of magic points a spell costs
 @property (strong, nonatomic) NSNumber* cost;
 
 
-// Note: add attack/heal/defense points later (for final project)
 
 @end
