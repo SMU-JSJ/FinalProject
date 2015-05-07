@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) NSMutableArray* nearbyPlayers;
 @property (strong, nonatomic) MatchModel* matchModel;
+@property (strong, nonatomic) UIAlertView* startingDuelAlert;
+@property (strong, nonatomic) UIAlertView* inviteSentAlert;
 
 @end
 
@@ -53,9 +55,14 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"viewWillDisappear");
     [super viewWillDisappear:animated];
     
     [self stopSearchingForNearbyPlayers];
+    
+    // Dismiss all alerts
+    [self dismissStartingDuelPopup];
+    [self dismissInvitePlayerPopup];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,7 +139,10 @@
     request.recipientResponseHandler = ^(GKPlayer *player, GKInviteRecipientResponse response) {
         if (response == GKInviteeResponseAccepted) {
             NSLog(@"Yo, they accepted the invite!");
+            [self showStartingDuelPopup];
             [[GKMatchmaker sharedMatchmaker] finishMatchmakingForMatch:self.matchModel.match];
+        } else {
+            NSLog(@"Declined invite with response: %ld", (long)response);
         }
     };
     
@@ -161,6 +171,35 @@
     else {
         [[GKMatchmaker sharedMatchmaker] addPlayersToMatch:self.matchModel.match matchRequest:request completionHandler:matchAddCompletionHandler];
     }
+    
+}
+
+- (void)showInvitePlayerPopup:(NSString*)playerName {
+    self.inviteSentAlert = [[UIAlertView alloc] initWithTitle:@"Invitation Sent"
+                                                      message:[NSString stringWithFormat:@"An invite was sent to %@.", [self removeQuotes:playerName]]
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [self.inviteSentAlert show];
+}
+
+- (void)dismissInvitePlayerPopup {
+    NSLog(@"dismissInvitePlayerPopup");
+    if (self.inviteSentAlert) [self.inviteSentAlert dismissWithClickedButtonIndex:0 animated:TRUE];
+}
+
+- (void)showStartingDuelPopup {
+    self.startingDuelAlert = [[UIAlertView alloc] initWithTitle:@"Starting duel..."
+                                                      message:@"Get ready for the duel to start!"
+                                                     delegate:self
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:nil];
+    [self.startingDuelAlert show];
+}
+
+- (void)dismissStartingDuelPopup {
+    NSLog(@"dismissStartingDuelPopup");
+    if (self.startingDuelAlert) [self.startingDuelAlert dismissWithClickedButtonIndex:0 animated:TRUE];
 }
 
 -(void)startDuel {
@@ -202,6 +241,23 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     }
 }
 
+//#pragma mark GKMatchmakerViewControllerDelegate methods
+//- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
+//    NSLog(@"matchmakerViewController didFailWithError");
+//}
+//
+//- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController hostedPlayerDidAccept:(GKPlayer *)player {
+//    NSLog(@"matchmakerViewController hostedPlayerDidAccept");
+//}
+//
+//- (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
+//    NSLog(@"matchmakerViewControllerWasCancelled");
+//}
+//
+//- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindHostedPlayers:(NSArray *)players {
+//    NSLog(@"matchmakerViewController didFindHostedPlayers");
+//}
+
 
 #pragma mark GKInviteEventListenerProtocol methods
 - (void)player:(GKPlayer *)player didRequestMatchWithRecipients:(NSArray *)recipientPlayers {
@@ -209,17 +265,15 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
 }
 
 - (void)player:(GKPlayer *)player didAcceptInvite:(GKInvite *)invite {
-    
     [[GKMatchmaker sharedMatchmaker] matchForInvite:invite completionHandler:^(GKMatch *match, NSError *error) {
         
-        NSLog(@"didAcceptInvite");
         if (error) {
             NSLog(@"Error creating match from invitation: %@", [error description]);
             //Tell ViewController that match connect failed.
             
         }
         else {
-            
+            [self showStartingDuelPopup];
             [self.matchModel updateWithMatch:match viewController:self];
         }
     }];
@@ -244,7 +298,7 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     GKPlayer* player = [self.nearbyPlayers objectAtIndex:indexPath.row];
     
     // Configure the cell...
-    cell.textLabel.text = player.displayName;
+    cell.textLabel.text = [self removeQuotes:player.displayName];
     
     return cell;
 }
@@ -253,50 +307,16 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     GKPlayer* player = [self.nearbyPlayers objectAtIndex:indexPath.row];
     NSLog(@"Reached row selection: Player %@", player.displayName);
     [self invitePlayer:player];
+    [self showInvitePlayerPopup:player.displayName];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma mark - Utility
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (NSString*)removeQuotes:(NSString*)str {
+    if ([str length] > 2) {
+        return [[str substringToIndex:[str length] - 1] substringFromIndex:2];
+    }
+    return @"";
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
