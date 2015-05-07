@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TrainViewController : UIViewController
 
 @end

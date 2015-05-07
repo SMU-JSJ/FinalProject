@@ -27,6 +27,10 @@
 
 #pragma mark - Table view data source
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 3;

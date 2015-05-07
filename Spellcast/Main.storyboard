@@ -18,116 +18,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-tH-fKZ">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73b-Nq-vRK">
                                 <rect key="frame" x="0.0" y="449" width="320" height="70"/>
-                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="350" verticalHuggingPriority="350" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUA-Sq-cKP">
-                                <rect key="frame" x="58" y="457" width="204" height="54"/>
-                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
-                                <state key="normal" title="Hold to Cast">
-                                    <color key="titleColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="holdCastButton:" destination="hKm-dy-9pc" eventType="touchDown" id="4JF-8z-mXD"/>
-                                    <action selector="releaseCastButton:" destination="hKm-dy-9pc" eventType="touchUpInside" id="9LC-VQ-pL7"/>
-                                    <action selector="releaseCastButtonOutside:" destination="hKm-dy-9pc" eventType="touchUpOutside" id="0lN-YI-YNz"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="263" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89t-cY-3cr">
-                                <rect key="frame" x="207" y="462" width="36" height="45"/>
-                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="24"/>
-                                <state key="normal" title="Yes">
-                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="m4N-Br-D5n"/>
-                                </connections>
-                            </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="264" horizontalCompressionResistancePriority="751" text="Arcesso vallum terrae?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OE-t9-aMB">
-                                <rect key="frame" x="84" y="457" width="115" height="54"/>
-                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="262" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-bI-Osu">
-                                <rect key="frame" x="267" y="462" width="37" height="45"/>
-                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="24"/>
-                                <state key="normal" title="No">
-                                    <color key="titleColor" red="0.93333333333333335" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="zyP-J8-c5s"/>
-                                </connections>
-                            </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-7t-B4k">
-                                <rect key="frame" x="16" y="457" width="54" height="54"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="350" verticalHuggingPriority="350" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUA-Sq-cKP">
+                                        <rect key="frame" x="58" y="4" width="204" height="62"/>
+                                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
+                                        <state key="normal" title="Hold to Cast">
+                                            <color key="titleColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="holdCastButton:" destination="hKm-dy-9pc" eventType="touchDown" id="4JF-8z-mXD"/>
+                                            <action selector="releaseCastButton:" destination="hKm-dy-9pc" eventType="touchUpInside" id="9LC-VQ-pL7"/>
+                                            <action selector="releaseCastButtonOutside:" destination="hKm-dy-9pc" eventType="touchUpOutside" id="0lN-YI-YNz"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="263" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89t-cY-3cr">
+                                        <rect key="frame" x="83" y="5" width="54" height="62"/>
+                                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
+                                        <state key="normal" title="Yes">
+                                            <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="m4N-Br-D5n"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="262" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-bI-Osu">
+                                        <rect key="frame" x="188" y="5" width="49" height="62"/>
+                                        <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
+                                        <state key="normal" title="No">
+                                            <color key="titleColor" red="0.93333333333333335" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="zyP-J8-c5s"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="ZSK-7t-B4k" secondAttribute="height" multiplier="1:1" id="4B9-en-v3G"/>
-                                    <constraint firstAttribute="height" constant="54" id="jHI-Wl-QRO"/>
+                                    <constraint firstAttribute="centerX" secondItem="QUA-Sq-cKP" secondAttribute="centerX" id="G9A-Ag-RXT"/>
+                                    <constraint firstItem="QUA-Sq-cKP" firstAttribute="centerY" secondItem="89t-cY-3cr" secondAttribute="centerY" constant="-0.5" id="S5w-E9-kKb"/>
+                                    <constraint firstAttribute="centerY" secondItem="QUA-Sq-cKP" secondAttribute="centerY" id="gDi-al-1P8"/>
+                                    <constraint firstItem="QUA-Sq-cKP" firstAttribute="leading" secondItem="89t-cY-3cr" secondAttribute="leading" constant="-25" id="h46-zX-bB3"/>
+                                    <constraint firstItem="QUA-Sq-cKP" firstAttribute="trailing" secondItem="qpA-bI-Osu" secondAttribute="trailing" constant="25" id="ws9-SU-n73"/>
+                                    <constraint firstAttribute="height" constant="70" id="yAU-JU-R9L"/>
+                                    <constraint firstItem="QUA-Sq-cKP" firstAttribute="centerY" secondItem="qpA-bI-Osu" secondAttribute="centerY" constant="-0.5" id="yGl-Lu-98Y"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="train_icon" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-7t-B4k">
+                                <rect key="frame" x="31" y="155" width="258" height="258"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZSK-7t-B4k" secondAttribute="height" multiplier="1:1" id="OSd-LV-rWX"/>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Ul-yE-Lhz">
-                                <rect key="frame" x="0.0" y="64" width="320" height="385"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpellTableViewCell" textLabel="X4n-c4-4y7" detailTextLabel="OAd-Jt-Zcg" imageView="CWt-Ey-Coa" style="IBUITableViewCellStyleSubtitle" id="KAa-09-MLU">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KAa-09-MLU" id="Hyc-9Y-orD">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X4n-c4-4y7">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Spell Translation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OAd-Jt-Zcg">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Arcesso Vallum Terrae" id="CWt-Ey-Coa">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="hKm-dy-9pc" id="G3l-ja-4f5"/>
-                                    <outlet property="delegate" destination="hKm-dy-9pc" id="9i6-gz-cKD"/>
-                                </connections>
-                            </tableView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kb-Kq-G1D">
+                                <rect key="frame" x="0.0" y="64" width="320" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="264" horizontalCompressionResistancePriority="751" text="Cast any spell!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OE-t9-aMB">
+                                        <rect key="frame" x="90" y="11" width="140" height="28"/>
+                                        <fontDescription key="fontDescription" name="IowanOldStyle-Bold" family="Iowan Old Style" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="5OE-t9-aMB" secondAttribute="centerY" id="WrC-JO-Zyg"/>
+                                    <constraint firstAttribute="height" constant="49" id="cO2-06-ll1"/>
+                                    <constraint firstAttribute="centerX" secondItem="5OE-t9-aMB" secondAttribute="centerX" id="mAr-TS-vdV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="73b-Nq-vRK" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="-16" id="0DT-UQ-gDg"/>
-                            <constraint firstItem="5Ul-yE-Lhz" firstAttribute="top" secondItem="gBC-Tk-vYm" secondAttribute="bottom" id="CD9-b3-JHj"/>
-                            <constraint firstItem="qpA-bI-Osu" firstAttribute="centerY" secondItem="QUA-Sq-cKP" secondAttribute="centerY" id="CXc-NG-y6j"/>
-                            <constraint firstItem="ZSK-7t-B4k" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" id="DIU-mb-GFu"/>
-                            <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="5OE-t9-aMB" secondAttribute="bottom" constant="8" id="EJg-uP-8zY"/>
-                            <constraint firstItem="73b-Nq-vRK" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" id="L1I-ox-cfS"/>
-                            <constraint firstItem="QUA-Sq-cKP" firstAttribute="centerY" secondItem="89t-cY-3cr" secondAttribute="centerY" id="M6t-1R-mXy"/>
-                            <constraint firstItem="QUA-Sq-cKP" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" constant="8" id="SvF-8g-kPR"/>
-                            <constraint firstItem="5OE-t9-aMB" firstAttribute="centerY" secondItem="QUA-Sq-cKP" secondAttribute="centerY" id="T3i-hQ-U1I"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="73b-Nq-vRK" secondAttribute="trailing" constant="-16" id="TI2-eP-vZf"/>
-                            <constraint firstItem="5OE-t9-aMB" firstAttribute="top" secondItem="5Ul-yE-Lhz" secondAttribute="bottom" constant="8" id="Tyr-mR-jWb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5Ul-yE-Lhz" secondAttribute="trailing" constant="-16" id="UTs-2p-u8z"/>
-                            <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="QUA-Sq-cKP" secondAttribute="bottom" constant="8" id="e86-gd-AC9"/>
-                            <constraint firstItem="5OE-t9-aMB" firstAttribute="leading" secondItem="ZSK-7t-B4k" secondAttribute="trailing" constant="14" id="gKk-5r-glz"/>
-                            <constraint firstAttribute="centerX" secondItem="QUA-Sq-cKP" secondAttribute="centerX" id="hAI-Af-wGz"/>
-                            <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="73b-Nq-vRK" secondAttribute="bottom" id="iqB-DF-bg3"/>
-                            <constraint firstItem="89t-cY-3cr" firstAttribute="leading" secondItem="5OE-t9-aMB" secondAttribute="trailing" constant="8" id="mBf-Zk-U7j"/>
-                            <constraint firstItem="qpA-bI-Osu" firstAttribute="trailing" secondItem="FSo-bM-b7q" secondAttribute="trailingMargin" id="r0R-GP-dJp"/>
-                            <constraint firstItem="ZSK-7t-B4k" firstAttribute="top" secondItem="QUA-Sq-cKP" secondAttribute="top" id="wSO-8u-oU1"/>
-                            <constraint firstItem="ZSK-7t-B4k" firstAttribute="bottom" secondItem="QUA-Sq-cKP" secondAttribute="bottom" id="wun-G7-Qzl"/>
-                            <constraint firstItem="5Ul-yE-Lhz" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="-16" id="xUw-d8-vkJ"/>
-                            <constraint firstItem="qpA-bI-Osu" firstAttribute="leading" secondItem="89t-cY-3cr" secondAttribute="trailing" constant="24" id="xtO-TZ-1Oz"/>
+                            <constraint firstItem="4Kb-Kq-G1D" firstAttribute="top" secondItem="gBC-Tk-vYm" secondAttribute="bottom" id="5FP-Tg-wU0"/>
+                            <constraint firstAttribute="centerX" secondItem="ZSK-7t-B4k" secondAttribute="centerX" constant="-0.5" id="FJk-nh-rvK"/>
+                            <constraint firstItem="fh9-mJ-lp1" firstAttribute="top" secondItem="73b-Nq-vRK" secondAttribute="bottom" id="Nr1-Fn-vie"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="73b-Nq-vRK" secondAttribute="trailing" constant="-16" id="QID-VG-bOQ"/>
+                            <constraint firstItem="wWY-tH-fKZ" firstAttribute="top" secondItem="FSo-bM-b7q" secondAttribute="top" id="SNS-QX-QEa"/>
+                            <constraint firstAttribute="centerY" secondItem="ZSK-7t-B4k" secondAttribute="centerY" constant="0.5" id="Skx-s8-Wvu"/>
+                            <constraint firstItem="ZSK-7t-B4k" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="15" id="X2S-yz-fvj"/>
+                            <constraint firstItem="wWY-tH-fKZ" firstAttribute="leading" secondItem="73b-Nq-vRK" secondAttribute="leading" id="bIs-7x-T4Y"/>
+                            <constraint firstItem="4Kb-Kq-G1D" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="-16" id="e8l-xu-ZG2"/>
+                            <constraint firstItem="wWY-tH-fKZ" firstAttribute="centerY" secondItem="ZSK-7t-B4k" secondAttribute="centerY" id="fVW-82-752"/>
+                            <constraint firstItem="wWY-tH-fKZ" firstAttribute="trailing" secondItem="73b-Nq-vRK" secondAttribute="trailing" id="jN2-QO-PUG"/>
+                            <constraint firstItem="73b-Nq-vRK" firstAttribute="leading" secondItem="FSo-bM-b7q" secondAttribute="leadingMargin" constant="-16" id="uFM-mC-WWh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZSK-7t-B4k" secondAttribute="trailing" constant="15" id="woq-u3-ehL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Kb-Kq-G1D" secondAttribute="trailing" constant="-16" id="zlj-Ez-OEe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Train" id="ZL1-tO-Ecn"/>
@@ -137,7 +120,6 @@
                         <outlet property="noButton" destination="qpA-bI-Osu" id="6c4-6M-Tda"/>
                         <outlet property="predictedSpellImageView" destination="ZSK-7t-B4k" id="cxq-vU-oaY"/>
                         <outlet property="predictedSpellNameLabel" destination="5OE-t9-aMB" id="JCX-Aw-jnu"/>
-                        <outlet property="spellTableView" destination="5Ul-yE-Lhz" id="l30-TU-w7O"/>
                         <outlet property="yesButton" destination="89t-cY-3cr" id="Y8M-Ay-2b0"/>
                     </connections>
                 </viewController>
@@ -244,7 +226,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="isP-Nx-74D" userLabel="Blue Background">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="isP-Nx-74D" userLabel="Blue Background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="UBF-NZ-HYf">
@@ -254,26 +236,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="25P-Jn-W13">
-                                <rect key="frame" x="0.0" y="64" width="320" height="115"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="108"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-CU-vx1">
                                 <rect key="frame" x="16" y="72" width="88" height="22"/>
                                 <fontDescription key="fontDescription" name="IowanOldStyle-Bold" family="Iowan Old Style" pointSize="16"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Lorem ipsum dolor sit amet, consectetur adipi" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-Qa-g3d">
-                                <rect key="frame" x="16" y="125" width="288" height="54"/>
+                                <rect key="frame" x="16" y="125" width="288" height="47"/>
                                 <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
-                                <rect key="frame" x="0.0" y="456" width="320" height="63"/>
+                                <rect key="frame" x="0.0" y="449" width="320" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="63" id="f6E-Zw-cwe"/>
+                                    <constraint firstAttribute="height" constant="70" id="f6E-Zw-cwe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
                                 <state key="normal" title="Hold to Cast">
@@ -287,7 +269,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-8m-blS">
-                                <rect key="frame" x="31" y="187" width="259" height="259"/>
+                                <rect key="frame" x="31" y="180" width="259" height="259"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NhU-8m-blS" secondAttribute="height" multiplier="1:1" id="FBk-rG-x93"/>
                                 </constraints>
@@ -315,19 +297,23 @@
                             <constraint firstAttribute="centerX" secondItem="NhU-8m-blS" secondAttribute="centerX" constant="-0.5" id="XcQ-1N-qZ9"/>
                             <constraint firstItem="dFp-CU-vx1" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="XwV-BE-kW4"/>
                             <constraint firstItem="25P-Jn-W13" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" id="Ysd-1s-tZi"/>
+                            <constraint firstItem="coD-3M-0dC" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="btr-mv-2XE"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="bottom" secondItem="25P-Jn-W13" secondAttribute="bottom" id="cbd-Hb-BUK"/>
                             <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="IiY-fI-peQ" secondAttribute="bottom" id="ebU-lW-6PO"/>
+                            <constraint firstItem="coD-3M-0dC" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="edF-RK-BBL"/>
+                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="isP-Nx-74D" secondAttribute="bottom" constant="-49" id="gma-8R-tKM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NhU-8m-blS" secondAttribute="trailing" constant="14" id="hGk-rW-H9a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="coD-3M-0dC" secondAttribute="trailing" constant="-16" id="kGV-Ub-Wgs"/>
                             <constraint firstItem="25P-Jn-W13" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="kIs-Zd-bcX"/>
-                            <constraint firstItem="coD-3M-0dC" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="luv-ei-cjX"/>
+                            <constraint firstItem="isP-Nx-74D" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="mro-Rk-RwZ"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="trailing" secondItem="RVm-9I-aeh" secondAttribute="trailingMargin" id="olh-0N-Jkz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="isP-Nx-74D" secondAttribute="trailing" constant="-16" id="pER-jo-Ak5"/>
                             <constraint firstItem="UBF-NZ-HYf" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="ql4-Xm-sDl"/>
-                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="coD-3M-0dC" secondAttribute="bottom" constant="-49" id="r7j-Wp-ZEP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UBF-NZ-HYf" secondAttribute="trailing" constant="-16" id="uLm-tP-xUO"/>
+                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="coD-3M-0dC" secondAttribute="bottom" constant="-49" id="uWh-xN-4uK"/>
                             <constraint firstItem="NhU-8m-blS" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="15" id="uWu-x8-ack"/>
-                            <constraint firstItem="coD-3M-0dC" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="wD0-TU-ys1"/>
+                            <constraint firstItem="isP-Nx-74D" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="vLC-fB-sQe"/>
                             <constraint firstItem="IiY-fI-peQ" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="xIT-jx-duV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="coD-3M-0dC" secondAttribute="trailing" constant="-16" id="zfX-TK-QhT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Learn a Spell" id="pDF-Pc-QWZ"/>
@@ -646,6 +632,7 @@
         <image name="purple_background" width="450" height="1600"/>
         <image name="red_full_background" width="900" height="1600"/>
         <image name="testing_30px" width="30" height="30"/>
+        <image name="train_icon" width="500" height="500"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

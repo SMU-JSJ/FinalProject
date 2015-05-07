@@ -30,8 +30,6 @@
 @property (strong, nonatomic) NSOperationQueue *backQueue;
 @property (strong, nonatomic) RingBuffer *ringBuffer;
 
-@property (weak, nonatomic) IBOutlet UITableView *spellTableView;
-
 @property (weak, nonatomic) IBOutlet UIButton *castSpellButton;
 @property (weak, nonatomic) IBOutlet UIView *castSpellBackground;
 
@@ -91,7 +89,6 @@
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Casting..." forState:UIControlStateNormal];
         [self.castSpellBackground setBackgroundColor:[[UIColor alloc] initWithRed:200/255.f green:200/255.f blue:200/255.f alpha:1]];
-//        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
         
         // Disable tab bar buttons
         for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
@@ -102,8 +99,6 @@
         data[0] = [NSNumber numberWithDouble:castingTime];
         self.lastData = data;
         
-        //[self sendFeatureArray:data
-        //             withLabel:self.spell.name];
         self.castSpellButton.enabled = NO;
         [self.castSpellButton setTitle:@"Predicting..." forState:UIControlStateNormal];
         [self.castSpellButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -165,82 +160,22 @@
     self.castSpellButton.enabled = YES;
     [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
     [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
-    self.predictedSpellImageView.hidden = YES;
-    self.predictedSpellNameLabel.hidden = YES;
     self.yesButton.hidden = YES;
     self.noButton.hidden = YES;
     
     if ([sender.currentTitle isEqualToString:@"Yes"]) {
         [self.spellModel sendFeatureArray:self.lastData withLabel:self.lastLabel];
     }
+    
+    self.predictedSpellImageView.image = [UIImage imageNamed:@"train_icon"];
+    self.predictedSpellNameLabel.text = @"Cast any spell!";
+    [UIView transitionWithView:self.predictedSpellImageView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromBottom animations:nil completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 3;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    if (section == 0) {
-        return [self.spellModel.attackSpells count];
-    } else if (section == 1) {
-        return [self.spellModel.healingSpells count];
-    } else {
-        return [self.spellModel.defenseSpells count];
-    }
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString *sectionName;
-    switch (section)
-    {
-        case 0:
-            sectionName = @"Attack Spells";
-            break;
-        case 1:
-            sectionName = @"Healing Spells";
-            break;
-        case 2:
-            sectionName = @"Defense Spells";
-            break;
-        default:
-            sectionName = @"";
-            break;
-    }
-    return sectionName;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpellTableViewCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    Spell* spell;
-    if (indexPath.section == 0) {
-        spell = self.spellModel.attackSpells[indexPath.row];
-    } else if (indexPath.section == 1) {
-        spell = self.spellModel.healingSpells[indexPath.row];
-    } else {
-        spell = self.spellModel.defenseSpells[indexPath.row];
-    }
-    
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@ 100px", spell.name]];
-    cell.textLabel.text = spell.name;
-    cell.detailTextLabel.text = spell.translation;
-    
-    return cell;
-}
-
 
 - (void)predictFeature:(NSMutableArray*)featureData {
     [self.castSpellBackground setBackgroundColor:[[UIColor alloc] initWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1]];
@@ -281,17 +216,18 @@
                  dispatch_async(dispatch_get_main_queue(), ^{
                      if ([self.spellModel getSpellWithName:name]) {
                          self.castSpellButton.hidden = YES;
-                         self.predictedSpellImageView.hidden = NO;
-                         self.predictedSpellNameLabel.hidden = NO;
                          self.yesButton.hidden = NO;
                          self.noButton.hidden = NO;
                          
                          self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", name];
                          self.predictedSpellImageView.image = [UIImage imageNamed:name];
+                         [UIView transitionWithView:self.predictedSpellImageView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromTop animations:nil completion:nil];
                      } else {
                          [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                          self.castSpellButton.enabled = YES;
                          [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
+                         [self.castSpellButton setBackgroundColor:[UIColor whiteColor]];
+                         
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Spell not found"
                                                                          message:@"Please train more."
                                                                         delegate:nil
@@ -302,6 +238,11 @@
                      
                  });
              } else {
+                 [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
+                 self.castSpellButton.enabled = YES;
+                 [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
+                 [self.castSpellButton setBackgroundColor:[UIColor whiteColor]];
+                 
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
                                                                  message:@"Please check your Internet connection."
                                                                 delegate:nil
