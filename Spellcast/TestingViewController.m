@@ -156,6 +156,10 @@
     self.casting = NO;
 }
 
+- (IBAction)releaseCastButtonOutside:(UIButton *)sender {
+    self.casting = NO;
+}
+
 - (IBAction)yesNoClicked:(UIButton *)sender {
     self.castSpellButton.hidden = NO;
     self.castSpellButton.enabled = YES;

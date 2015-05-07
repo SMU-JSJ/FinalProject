@@ -108,6 +108,10 @@
     self.casting = NO;
 }
 
+- (IBAction)releaseCastButtonOutside:(UIButton *)sender {
+    self.casting = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

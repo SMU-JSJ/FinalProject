@@ -29,12 +29,14 @@
 
 @property (weak, nonatomic) IBOutlet UIProgressView *myHP;
 @property (weak, nonatomic) IBOutlet UIProgressView *myMana;
+@property (weak, nonatomic) IBOutlet UIView *myHPManaBackground;
 @property (weak, nonatomic) IBOutlet UILabel *myName;
 @property (weak, nonatomic) IBOutlet UIImageView *mySpell;
 @property (nonatomic) float myDefense;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *theirHP;
 @property (weak, nonatomic) IBOutlet UIProgressView *theirMana;
+@property (weak, nonatomic) IBOutlet UIView *theirHPManaBackground;
 @property (weak, nonatomic) IBOutlet UILabel *theirName;
 @property (weak, nonatomic) IBOutlet UIImageView *theirSpell;
 @property (nonatomic) float theirDefense;
@@ -119,6 +121,12 @@
                           withY:motion.userAcceleration.y
                           withZ:motion.userAcceleration.z];
     }];
+    
+    // Stylize things with transluscent background
+//    [self makeTransluscentBackground:self.battleLog style:@"black"];
+//    [self makeTransluscentBackground:self.castSpellButton style:@"white"];
+//    [self makeTransluscentBackground:self.myHPManaBackground style:@"black"];
+//    [self makeTransluscentBackground:self.theirHPManaBackground style:@"black"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -128,7 +136,6 @@
     
     if (![self.matchModel isMatchRunning]) {
         NSLog(@"end match");
-        [self.matchModel endMatch];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     //Set the opponent's display name.
@@ -143,12 +150,24 @@
     [super viewWillDisappear:animated];
     
     [self.manaTimer invalidate];
+    [self.matchModel endMatch];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//-(void)makeTransluscentBackground:(UIView*)view style:(NSString*)style {
+//    view.backgroundColor = [UIColor clearColor];
+//    UIToolbar* bgToolbar = [[UIToolbar alloc] initWithFrame:view.frame];
+//    if ([style isEqualToString:@"white"]) {
+//        bgToolbar.barStyle = UIBarStyleDefault;
+//    } else {
+//        bgToolbar.barStyle = UIBarStyleBlack;
+//    }
+//    [view.superview insertSubview:bgToolbar belowSubview:view];
+//}
 
 - (void)setCasting:(BOOL)casting {
     _casting = casting;
@@ -158,7 +177,7 @@
         [self.ringBuffer reset];
         [self.castSpellButton setTitle:@"Casting..." forState:UIControlStateNormal];
         [self.castSpellButton setBackgroundColor:[[UIColor alloc] initWithRed:200/255.f green:200/255.f blue:200/255.f alpha:1]];
-        //        [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:255/255.f green:51/255.f blue:42/255.f alpha:1] forState:UIControlStateNormal];
+        //[self makeTransluscentBackground:self.castSpellButton style:@"black"];
         
         // Disable tab bar buttons
         for (UITabBarItem *tmpTabBarItem in [[self.tabBarController tabBar] items])
@@ -215,17 +234,24 @@
     float finalStrength = ([spell.strength floatValue]*[spellAccuracy floatValue])/100.0;
     float cost = [spell.cost floatValue]/100.0;
     NSString* newMove;
+    
+    UIFont *font = [UIFont fontWithName:@"IowanOldStyle-Roman" size:14.0];
+    UIFont *boldFont = [UIFont fontWithName:@"IowanOldStyle-Bold" size:14.0];
+    int boldedLength;
     UIColor* textColor;
-    UIColor* red = [UIColor redColor];
-    UIColor* green = [UIColor greenColor];
+    UIColor* myColor = [[UIColor alloc] initWithRed:126/255.f green:232/255.f blue:255/255.f alpha:1]; // blue
+    UIColor* theirColor = [[UIColor alloc] initWithRed:219/255.f green:177/255.f blue:246/255.f alpha:1]; // purple
     
     if (caster == 0) {
         if (self.myMana.progress + cost > 1) {
             return;
         }
         self.mySpell.image = [UIImage imageNamed:spellName];
+        [UIView transitionWithView:self.mySpell duration:0.5 options:UIViewAnimationOptionTransitionFlipFromTop animations:nil completion:nil];
         self.myMana.progress = self.myMana.progress + cost;
-        textColor = green;
+        
+        textColor = myColor;
+        boldedLength = 4;
         
         if (spell.type == ATTACK) {
             float newStrength = finalStrength - self.theirDefense;
@@ -239,7 +265,8 @@
                 self.theirDefense = 0;
             }
             
-            textColor = red;
+            textColor = theirColor;
+            boldedLength = 6;
             newMove = [NSString stringWithFormat:@"Enemy: -%.0f HP %@\n", newStrength*100, spellName];
             
         } else if (spell.type == HEALMAGIC) {
@@ -250,16 +277,20 @@
             newMove = [NSString stringWithFormat:@"You: +%.0f HP %@\n", finalStrength*100, spellName];
         }else if (spell.type == DEFEND) {
             self.myDefense = finalStrength;
-            newMove = [NSString stringWithFormat:@"You: %.0f Defense %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"You: +%.0f Defense %@\n", finalStrength*100, spellName];
         }
     } else {
         if (self.theirMana.progress - cost < 0) {
             return;
         }
+        
         self.theirSpell.image = [UIImage imageNamed:spellName];
+        [UIView transitionWithView:self.theirSpell duration:0.5 options:UIViewAnimationOptionTransitionFlipFromTop animations:nil completion:nil];
         self.theirMana.progress = self.theirMana.progress - cost;
         
-        textColor = red;
+        textColor = theirColor;
+        boldedLength = 6;
+        
         if (spell.type == ATTACK) {
             float newStrength = finalStrength - self.theirDefense;
             if (newStrength < 0) {
@@ -274,7 +305,8 @@
             
             newMove = [NSString stringWithFormat:@"You: -%.0f HP %@\n", newStrength*100, spellName];
             
-            textColor = green;
+            textColor = myColor;
+            boldedLength = 4;
             
         } else if (spell.type == HEALMAGIC) {
             self.theirMana.progress = self.theirMana.progress + (finalStrength);
@@ -284,13 +316,15 @@
             newMove = [NSString stringWithFormat:@"Enemy: +%.0f HP %@\n", finalStrength*100, spellName];
         }else if (spell.type == DEFEND) {
             self.theirDefense = finalStrength;
-            newMove = [NSString stringWithFormat:@"Enemy: %.0f Defense %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"Enemy: +%.0f Defense %@\n", finalStrength*100, spellName];
         }
     }
     
     
-    NSAttributedString* attributedNewMove = [[NSAttributedString alloc] initWithString:newMove attributes:@{NSForegroundColorAttributeName:textColor}];
+    NSMutableAttributedString* attributedNewMove = [[NSMutableAttributedString alloc] initWithString:newMove attributes:@{NSForegroundColorAttributeName:textColor, NSFontAttributeName:font}];
+    [attributedNewMove addAttribute:NSFontAttributeName value:boldFont range:NSMakeRange(0, boldedLength)];
     [self.battleLog.textStorage appendAttributedString:attributedNewMove];
+    [self scrollBattleLogToBottom];
     
     if (self.myHP.progress == 1 || self.theirHP.progress == 0) {
         [self matchOver];
@@ -317,8 +351,38 @@
     
 }
 
+- (void)scrollBattleLogToBottom {
+    if (self.battleLog.contentSize.height > self.battleLog.frame.size.height) {
+        CGPoint offset = CGPointMake(0, self.battleLog.contentSize.height - self.battleLog.frame.size.height);
+        [self.battleLog setContentOffset:offset animated:YES];
+    }
+}
+
+- (IBAction)holdCastButton:(UIButton *)sender {
+    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+        self.casting = YES;
+    }
+}
+
+- (IBAction)releaseCastButton:(UIButton *)sender {
+    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+        self.casting = NO;
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (IBAction)releaseCastButtonOutside:(UIButton *)sender {
+    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+        self.casting = NO;
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 - (void)predictFeature:(NSMutableArray*)featureData {
-    [self.castSpellButton setBackgroundColor:[[UIColor alloc] initWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1]];
+    [self.castSpellButton setBackgroundColor:[UIColor whiteColor]];
+    //[self makeTransluscentBackground:self.castSpellButton style:@"white"];
     
     // send the server new feature data and request back a prediction of the class
     
@@ -341,65 +405,50 @@
     
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-         if(!error) {
-             NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-             
-             NSString* name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
-             name = [[name substringToIndex:[name length] - 2] substringFromIndex:3];
-             NSNumber* accuracy = [responseData objectForKey:name];
-             NSLog(@"Name = %@, Accuracy = %f", name, [accuracy doubleValue]);
-             
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 Spell *spell = [self.spellModel getSpellWithName:name];
-                 if (spell && [accuracy doubleValue] > 0.5) {
-                     // Spell was found and was accurate enough
-                     [self.matchModel sendMessage:@{@"spellName":name, @"spellAccuracy":accuracy} toPlayersInMatch:self.matchModel.match.players];
-                     [self handleSpellCast:name spellAccuracy:accuracy caster:0];
-                 } else {
-                     // Spell was not found or was not accurate enough
-                     self.mySpell.image = [UIImage imageNamed:@"question"];
-                 }
+         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+             if(!error) {
+                 NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                  
-                 if (![self.castSpellButton.currentTitle isEqualToString:@"Exit Match"]) {
-                     [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
-                 }
+                 NSString* name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
+                 name = [[name substringToIndex:[name length] - 2] substringFromIndex:3];
+                 NSNumber* accuracy = [responseData objectForKey:name];
+                 NSLog(@"Name = %@, Accuracy = %f", name, [accuracy doubleValue]);
+                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     Spell *spell = [self.spellModel getSpellWithName:name];
+                     if (spell && [accuracy doubleValue] > 0.5) {
+                         // Spell was found and was accurate enough
+                         [self.matchModel sendMessage:@{@"spellName":name, @"spellAccuracy":accuracy} toPlayersInMatch:self.matchModel.match.players];
+                         [self handleSpellCast:name spellAccuracy:accuracy caster:0];
+                     } else {
+                         // Spell was not found or was not accurate enough
+                         self.mySpell.image = [UIImage imageNamed:@"question"];
+                     }
+                     
+                     if (![self.castSpellButton.currentTitle isEqualToString:@"Exit Match"]) {
+                         [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
+                     }
+                     self.castSpellButton.enabled = YES;
+                     [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
+                     
+                     
+                 });
+             } else {
+                 // Connection error
+                 [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                  self.castSpellButton.enabled = YES;
                  [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
-                     
                  
-             });
-         } else {
-             // Connection error
-             [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
-             self.castSpellButton.enabled = YES;
-             [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
-             
-             
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
-                                                             message:@"Please check your Internet connection."
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil];
-             [alert show];
-         }
-     }];
+                 
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
+                                                                 message:@"Please check your Internet connection."
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"OK"
+                                                       otherButtonTitles:nil];
+                 [alert show];
+             }
+         }];
     [postTask resume];
-}
-
-- (IBAction)holdCastButton:(UIButton *)sender {
-    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
-        self.casting = YES;
-    }
-}
-
-- (IBAction)releaseCastButton:(UIButton *)sender {
-    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
-        self.casting = NO;
-    } else {
-        [self.matchModel endMatch];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
 }
 
 #pragma mark GKMatchDelegate methods
@@ -417,7 +466,6 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     
     if (![self.matchModel isMatchRunning]) {
         NSLog(@"end match");
-        [self.matchModel endMatch];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
