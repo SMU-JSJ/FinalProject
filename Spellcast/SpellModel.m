@@ -180,27 +180,6 @@
     return nil;
 }
 
-// tell the server to train a new model for the given dataset id (dsid)
-- (void)updateModel {
-    // create a GET request and get the reponse back as NSData
-    NSString* baseURL = [NSString stringWithFormat:@"%@/UpdateModelSVM",self.SERVER_URL];
-    NSString *query = [NSString stringWithFormat:@"?dsid=%d",[self.dsid intValue]];
-    
-    NSURL *getUrl = [NSURL URLWithString: [baseURL stringByAppendingString:query]];
-    NSURLSessionDataTask *dataTask = [self.session dataTaskWithURL:getUrl
-         completionHandler:^(NSData *data,
-                             NSURLResponse *response,
-                             NSError *error) {
-             if(!error){
-                 // we should get back the accuracy of the model
-                 NSLog(@"%@",response);
-                 NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                 NSLog(@"Accuracy using resubstitution: %@",responseData[@"resubAccuracy"]);
-             }
-         }];
-    [dataTask resume]; // start the task
-}
-
 // Add a data point and a label to the database for the current dataset ID
 - (void)sendFeatureArray:(NSArray*)data withLabel:(NSString*)label {
     // setup the url
@@ -223,18 +202,7 @@
     [request setHTTPBody:requestBody];
     
     // start the request, print the responses etc.
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-             if(!error){
-                 NSLog(@"%@",response);
-                 NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                 
-                 // we should get back the feature data from the server and the label it parsed
-                 NSString *featuresResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"feature"]];
-                 NSString *labelResponse = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"label"]];
-                 NSLog(@"received %@ and %@",featuresResponse,labelResponse);
-             }
-         }];
+    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request completionHandler:nil];
     [postTask resume];
     
 }

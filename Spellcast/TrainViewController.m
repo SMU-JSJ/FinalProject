@@ -5,14 +5,14 @@
 //  Copyright (c) 2015 SMUJSJ. All rights reserved.
 //
 
-#import "TestingViewController.h"
+#import "TrainViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "RingBuffer.h"
 #import "SpellModel.h"
 
 #define UPDATE_INTERVAL 1/10.0
 
-@interface TestingViewController () <NSURLSessionTaskDelegate>
+@interface TrainViewController () <NSURLSessionTaskDelegate>
 
 // for the machine learning session
 @property (strong,nonatomic) NSURLSession *session;
@@ -45,7 +45,7 @@
 
 @end
 
-@implementation TestingViewController
+@implementation TrainViewController
 
 // Gets an instance of the SpellModel class using lazy instantiation
 - (SpellModel*) spellModel {

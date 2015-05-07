@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrainingTableViewController : UITableViewController
+@interface LearnTableViewController : UITableViewController
 
 @end

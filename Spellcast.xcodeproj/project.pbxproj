@@ -16,9 +16,9 @@
 		6847D1941AEEDF08003AD70A /* RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1871AEEDF08003AD70A /* RingBuffer.m */; };
 		6847D1951AEEDF08003AD70A /* SpellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1891AEEDF08003AD70A /* SpellModel.m */; };
 		6847D1961AEEDF08003AD70A /* Spell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18B1AEEDF08003AD70A /* Spell.m */; };
-		6847D1971AEEDF08003AD70A /* TrainingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */; };
-		6847D1981AEEDF08003AD70A /* TrainingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18F1AEEDF08003AD70A /* TrainingViewController.m */; };
-		6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1911AEEDF08003AD70A /* TestingViewController.m */; };
+		6847D1971AEEDF08003AD70A /* LearnTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18D1AEEDF08003AD70A /* LearnTableViewController.m */; };
+		6847D1981AEEDF08003AD70A /* LearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D18F1AEEDF08003AD70A /* LearnViewController.m */; };
+		6847D1991AEEDF08003AD70A /* TrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6847D1911AEEDF08003AD70A /* TrainViewController.m */; };
 		68E235A61AEFF4640041AB42 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E235A51AEFF4640041AB42 /* GameKit.framework */; };
 		EFB9C7CA1AEFEB1C00D63AFA /* PlayersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9C7C91AEFEB1C00D63AFA /* PlayersTableViewController.m */; };
 		EFB9C7D01AF90CED00D63AFA /* DuelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFB9C7CF1AF90CED00D63AFA /* DuelViewController.m */; };
@@ -53,12 +53,12 @@
 		6847D1891AEEDF08003AD70A /* SpellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpellModel.m; sourceTree = "<group>"; };
 		6847D18A1AEEDF08003AD70A /* Spell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spell.h; sourceTree = "<group>"; };
 		6847D18B1AEEDF08003AD70A /* Spell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spell.m; sourceTree = "<group>"; };
-		6847D18C1AEEDF08003AD70A /* TrainingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingTableViewController.h; sourceTree = "<group>"; };
-		6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingTableViewController.m; sourceTree = "<group>"; };
-		6847D18E1AEEDF08003AD70A /* TrainingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingViewController.h; sourceTree = "<group>"; };
-		6847D18F1AEEDF08003AD70A /* TrainingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingViewController.m; sourceTree = "<group>"; };
-		6847D1901AEEDF08003AD70A /* TestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingViewController.h; sourceTree = "<group>"; };
-		6847D1911AEEDF08003AD70A /* TestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingViewController.m; sourceTree = "<group>"; };
+		6847D18C1AEEDF08003AD70A /* LearnTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnTableViewController.h; sourceTree = "<group>"; };
+		6847D18D1AEEDF08003AD70A /* LearnTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnTableViewController.m; sourceTree = "<group>"; };
+		6847D18E1AEEDF08003AD70A /* LearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnViewController.h; sourceTree = "<group>"; };
+		6847D18F1AEEDF08003AD70A /* LearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnViewController.m; sourceTree = "<group>"; };
+		6847D1901AEEDF08003AD70A /* TrainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainViewController.h; sourceTree = "<group>"; };
+		6847D1911AEEDF08003AD70A /* TrainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainViewController.m; sourceTree = "<group>"; };
 		68E235A51AEFF4640041AB42 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EFB9C7C81AEFEB1C00D63AFA /* PlayersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayersTableViewController.h; sourceTree = "<group>"; };
 		EFB9C7C91AEFEB1C00D63AFA /* PlayersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayersTableViewController.m; sourceTree = "<group>"; };
@@ -122,12 +122,12 @@
 				6847D1871AEEDF08003AD70A /* RingBuffer.m */,
 				6847D18A1AEEDF08003AD70A /* Spell.h */,
 				6847D18B1AEEDF08003AD70A /* Spell.m */,
-				6847D18C1AEEDF08003AD70A /* TrainingTableViewController.h */,
-				6847D18D1AEEDF08003AD70A /* TrainingTableViewController.m */,
-				6847D18E1AEEDF08003AD70A /* TrainingViewController.h */,
-				6847D18F1AEEDF08003AD70A /* TrainingViewController.m */,
-				6847D1901AEEDF08003AD70A /* TestingViewController.h */,
-				6847D1911AEEDF08003AD70A /* TestingViewController.m */,
+				6847D18C1AEEDF08003AD70A /* LearnTableViewController.h */,
+				6847D18D1AEEDF08003AD70A /* LearnTableViewController.m */,
+				6847D18E1AEEDF08003AD70A /* LearnViewController.h */,
+				6847D18F1AEEDF08003AD70A /* LearnViewController.m */,
+				6847D1901AEEDF08003AD70A /* TrainViewController.h */,
+				6847D1911AEEDF08003AD70A /* TrainViewController.m */,
 				EFB9C7CE1AF90CED00D63AFA /* DuelViewController.h */,
 				EFB9C7CF1AF90CED00D63AFA /* DuelViewController.m */,
 				6847D16A1AEEDED4003AD70A /* Images.xcassets */,
@@ -273,13 +273,13 @@
 				6847D1961AEEDF08003AD70A /* Spell.m in Sources */,
 				6847D1921AEEDF08003AD70A /* AppDelegate.m in Sources */,
 				6847D1601AEEDED3003AD70A /* main.m in Sources */,
-				6847D1981AEEDF08003AD70A /* TrainingViewController.m in Sources */,
+				6847D1981AEEDF08003AD70A /* LearnViewController.m in Sources */,
 				6847D1941AEEDF08003AD70A /* RingBuffer.m in Sources */,
 				EFB9C7D31AF95C1D00D63AFA /* MatchModel.m in Sources */,
 				EFB9C7CA1AEFEB1C00D63AFA /* PlayersTableViewController.m in Sources */,
-				6847D1971AEEDF08003AD70A /* TrainingTableViewController.m in Sources */,
+				6847D1971AEEDF08003AD70A /* LearnTableViewController.m in Sources */,
 				EFB9C7D01AF90CED00D63AFA /* DuelViewController.m in Sources */,
-				6847D1991AEEDF08003AD70A /* TestingViewController.m in Sources */,
+				6847D1991AEEDF08003AD70A /* TrainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

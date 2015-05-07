@@ -9,7 +9,7 @@
         <!--Train-->
         <scene sceneID="Dcd-fj-93y">
             <objects>
-                <viewController id="hKm-dy-9pc" customClass="TestingViewController" sceneMemberID="viewController">
+                <viewController id="hKm-dy-9pc" customClass="TrainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gBC-Tk-vYm"/>
                         <viewControllerLayoutGuide type="bottom" id="fh9-mJ-lp1"/>
@@ -23,8 +23,8 @@
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="350" verticalHuggingPriority="350" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUA-Sq-cKP">
-                                <rect key="frame" x="59" y="457" width="203" height="54"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                <rect key="frame" x="58" y="457" width="204" height="54"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
                                 <state key="normal" title="Hold to Cast">
                                     <color key="titleColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -35,6 +35,41 @@
                                     <action selector="releaseCastButtonOutside:" destination="hKm-dy-9pc" eventType="touchUpOutside" id="0lN-YI-YNz"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="263" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89t-cY-3cr">
+                                <rect key="frame" x="207" y="462" width="36" height="45"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="24"/>
+                                <state key="normal" title="Yes">
+                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="m4N-Br-D5n"/>
+                                </connections>
+                            </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="264" horizontalCompressionResistancePriority="751" text="Arcesso vallum terrae?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OE-t9-aMB">
+                                <rect key="frame" x="84" y="457" width="115" height="54"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="262" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-bI-Osu">
+                                <rect key="frame" x="267" y="462" width="37" height="45"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="24"/>
+                                <state key="normal" title="No">
+                                    <color key="titleColor" red="0.93333333333333335" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="zyP-J8-c5s"/>
+                                </connections>
+                            </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-7t-B4k">
+                                <rect key="frame" x="16" y="457" width="54" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ZSK-7t-B4k" secondAttribute="height" multiplier="1:1" id="4B9-en-v3G"/>
+                                    <constraint firstAttribute="height" constant="54" id="jHI-Wl-QRO"/>
+                                </constraints>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="5Ul-yE-Lhz">
                                 <rect key="frame" x="0.0" y="64" width="320" height="385"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -68,41 +103,6 @@
                                     <outlet property="delegate" destination="hKm-dy-9pc" id="9i6-gz-cKD"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="263" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89t-cY-3cr">
-                                <rect key="frame" x="206" y="464" width="38" height="40"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                                <state key="normal" title="Yes">
-                                    <color key="titleColor" red="0.25882352939999997" green="0.81960784310000001" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="m4N-Br-D5n"/>
-                                </connections>
-                            </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="264" horizontalCompressionResistancePriority="751" text="Arcesso vallum terrae?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5OE-t9-aMB">
-                                <rect key="frame" x="84" y="457" width="114" height="54"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="262" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpA-bI-Osu">
-                                <rect key="frame" x="268" y="464" width="36" height="40"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
-                                <state key="normal" title="No">
-                                    <color key="titleColor" red="0.93333333333333335" green="0.11764705882352941" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="yesNoClicked:" destination="hKm-dy-9pc" eventType="touchUpInside" id="zyP-J8-c5s"/>
-                                </connections>
-                            </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="300" verticalHuggingPriority="300" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="ZSK-7t-B4k">
-                                <rect key="frame" x="16" y="457" width="54" height="54"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ZSK-7t-B4k" secondAttribute="height" multiplier="1:1" id="4B9-en-v3G"/>
-                                    <constraint firstAttribute="height" constant="54" id="jHI-Wl-QRO"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -187,7 +187,7 @@
         <!--Learn-->
         <scene sceneID="vA3-SK-sKS">
             <objects>
-                <tableViewController id="9AV-GX-2VM" customClass="TrainingTableViewController" sceneMemberID="viewController">
+                <tableViewController id="9AV-GX-2VM" customClass="LearnTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vQN-ff-wSa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -200,13 +200,13 @@
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wbx-ng-rcx">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Spell Translation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yhB-JM-ITC">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="11"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -232,10 +232,10 @@
             </objects>
             <point key="canvasLocation" x="1270" y="364"/>
         </scene>
-        <!--Train a Spell-->
+        <!--Learn a Spell-->
         <scene sceneID="FUd-vS-iRR">
             <objects>
-                <viewController id="LEA-Om-Iup" customClass="TrainingViewController" sceneMemberID="viewController">
+                <viewController id="LEA-Om-Iup" customClass="LearnViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OnL-Me-Yul"/>
                         <viewControllerLayoutGuide type="bottom" id="Nga-n8-EWh"/>
@@ -244,24 +244,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blue_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="isP-Nx-74D" userLabel="Blue Background">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="green_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="UBF-NZ-HYf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="coD-3M-0dC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="25P-Jn-W13">
+                                <rect key="frame" x="0.0" y="64" width="320" height="115"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Spell Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFp-CU-vx1">
-                                <rect key="frame" x="16" y="72" width="85" height="20"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="16" y="72" width="88" height="22"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Bold" family="Iowan Old Style" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Lorem ipsum dolor sit amet, consectetur adipi" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-Qa-g3d">
-                                <rect key="frame" x="16" y="123" width="288" height="58"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="16" y="125" width="288" height="54"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
-                                <rect key="frame" x="59" y="456" width="203" height="55"/>
+                                <rect key="frame" x="0.0" y="456" width="320" height="63"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="YzR-6Z-DZx"/>
+                                    <constraint firstAttribute="height" constant="63" id="f6E-Zw-cwe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="36"/>
                                 <state key="normal" title="Hold to Cast">
                                     <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -273,39 +287,54 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arcesso Vallum Terrae" translatesAutoresizingMaskIntoConstraints="NO" id="NhU-8m-blS">
-                                <rect key="frame" x="31" y="189" width="259" height="259"/>
+                                <rect key="frame" x="31" y="187" width="259" height="259"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="NhU-8m-blS" secondAttribute="height" multiplier="1:1" id="FBk-rG-x93"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="300" text="Spell Translation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KV-6X-jBm">
-                                <rect key="frame" x="16" y="98" width="107" height="17"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="16" y="97" width="94" height="20"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Italic" family="Iowan Old Style" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="IiY-fI-peQ" secondAttribute="centerX" constant="-0.5" id="5jM-S7-fuO"/>
+                            <constraint firstItem="NhU-8m-blS" firstAttribute="top" secondItem="P9C-Qa-g3d" secondAttribute="bottom" constant="8" id="3ov-9D-mjO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IiY-fI-peQ" secondAttribute="trailing" constant="-16" id="9P4-18-0Ou"/>
                             <constraint firstItem="1KV-6X-jBm" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="BZ9-vo-DnR"/>
+                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="UBF-NZ-HYf" secondAttribute="bottom" constant="-49" id="K7D-yH-A7r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="25P-Jn-W13" secondAttribute="trailing" constant="-16" id="L1P-C7-pl9"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="top" secondItem="1KV-6X-jBm" secondAttribute="bottom" constant="8" id="LHR-dF-BbA"/>
-                            <constraint firstItem="1KV-6X-jBm" firstAttribute="top" secondItem="dFp-CU-vx1" secondAttribute="bottom" constant="6" id="O1b-kF-Q0D"/>
+                            <constraint firstItem="UBF-NZ-HYf" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="LpH-E9-Fmr"/>
+                            <constraint firstItem="1KV-6X-jBm" firstAttribute="top" secondItem="dFp-CU-vx1" secondAttribute="bottom" constant="3" id="O1b-kF-Q0D"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="Owf-1r-xuc"/>
                             <constraint firstItem="dFp-CU-vx1" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="8" id="Ryc-uG-JfP"/>
+                            <constraint firstItem="IiY-fI-peQ" firstAttribute="top" secondItem="NhU-8m-blS" secondAttribute="bottom" constant="10" id="XIT-dM-ash"/>
                             <constraint firstAttribute="centerX" secondItem="NhU-8m-blS" secondAttribute="centerX" constant="-0.5" id="XcQ-1N-qZ9"/>
                             <constraint firstItem="dFp-CU-vx1" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" id="XwV-BE-kW4"/>
-                            <constraint firstItem="NhU-8m-blS" firstAttribute="top" secondItem="P9C-Qa-g3d" secondAttribute="bottom" constant="8" id="a3m-zM-AQf"/>
+                            <constraint firstItem="25P-Jn-W13" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" id="Ysd-1s-tZi"/>
+                            <constraint firstItem="P9C-Qa-g3d" firstAttribute="bottom" secondItem="25P-Jn-W13" secondAttribute="bottom" id="cbd-Hb-BUK"/>
+                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="IiY-fI-peQ" secondAttribute="bottom" id="ebU-lW-6PO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NhU-8m-blS" secondAttribute="trailing" constant="14" id="hGk-rW-H9a"/>
-                            <constraint firstItem="IiY-fI-peQ" firstAttribute="top" secondItem="NhU-8m-blS" secondAttribute="bottom" constant="8" id="haQ-W3-9ut"/>
+                            <constraint firstItem="25P-Jn-W13" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="kIs-Zd-bcX"/>
+                            <constraint firstItem="coD-3M-0dC" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="luv-ei-cjX"/>
                             <constraint firstItem="P9C-Qa-g3d" firstAttribute="trailing" secondItem="RVm-9I-aeh" secondAttribute="trailingMargin" id="olh-0N-Jkz"/>
+                            <constraint firstItem="UBF-NZ-HYf" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="ql4-Xm-sDl"/>
+                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="coD-3M-0dC" secondAttribute="bottom" constant="-49" id="r7j-Wp-ZEP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UBF-NZ-HYf" secondAttribute="trailing" constant="-16" id="uLm-tP-xUO"/>
                             <constraint firstItem="NhU-8m-blS" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="15" id="uWu-x8-ack"/>
-                            <constraint firstItem="Nga-n8-EWh" firstAttribute="top" secondItem="IiY-fI-peQ" secondAttribute="bottom" constant="8" id="vng-gx-bAC"/>
+                            <constraint firstItem="coD-3M-0dC" firstAttribute="top" secondItem="OnL-Me-Yul" secondAttribute="bottom" constant="-64" id="wD0-TU-ys1"/>
+                            <constraint firstItem="IiY-fI-peQ" firstAttribute="leading" secondItem="RVm-9I-aeh" secondAttribute="leadingMargin" constant="-16" id="xIT-jx-duV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="coD-3M-0dC" secondAttribute="trailing" constant="-16" id="zfX-TK-QhT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Train a Spell" id="pDF-Pc-QWZ"/>
+                    <navigationItem key="navigationItem" title="Learn a Spell" id="pDF-Pc-QWZ"/>
                     <connections>
                         <outlet property="castSpellButton" destination="IiY-fI-peQ" id="5QY-F8-NsX"/>
+                        <outlet property="greenBackground" destination="UBF-NZ-HYf" id="YbX-b1-Xv1"/>
+                        <outlet property="redBackground" destination="coD-3M-0dC" id="tuL-1O-dIj"/>
                         <outlet property="spellDescriptionLabel" destination="P9C-Qa-g3d" id="JSe-vf-ccP"/>
                         <outlet property="spellImageView" destination="NhU-8m-blS" id="Nhf-lC-Twz"/>
                         <outlet property="spellNameLabel" destination="dFp-CU-vx1" id="fzi-qQ-OFN"/>
@@ -351,7 +380,7 @@
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Qv-NE-yIv">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -516,7 +545,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="L8p-J9-xCc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="45"/>
+                                <fontDescription key="fontDescription" name="IowanOldStyle-Roman" family="Iowan Old Style" pointSize="45"/>
                                 <state key="normal" title="Hold to Cast">
                                     <color key="titleColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -610,9 +639,12 @@
         <image name="Arcesso Vallum Terrae" width="1000" height="1000"/>
         <image name="battle_jewel" width="500" height="500"/>
         <image name="blue_background" width="453" height="1600"/>
+        <image name="blue_full_background" width="900" height="1600"/>
         <image name="duel_30px" width="30" height="30"/>
+        <image name="green_full_background" width="900" height="1600"/>
         <image name="learn_30px" width="30" height="30"/>
         <image name="purple_background" width="450" height="1600"/>
+        <image name="red_full_background" width="900" height="1600"/>
         <image name="testing_30px" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

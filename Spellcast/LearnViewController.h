@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "Spell.h"
 
-@interface TrainingViewController : UIViewController
+@interface LearnViewController : UIViewController
 
 @property (strong, nonatomic) Spell* spell;
 

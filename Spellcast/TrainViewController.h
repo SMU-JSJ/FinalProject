@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestingViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TrainViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

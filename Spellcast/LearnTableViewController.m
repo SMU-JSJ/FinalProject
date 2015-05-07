@@ -5,17 +5,17 @@
 //  Copyright (c) 2015 SMUJSJ. All rights reserved.
 //
 
-#import "TrainingTableViewController.h"
+#import "LearnTableViewController.h"
 #import "SpellModel.h"
-#import "TrainingViewController.h"
+#import "LearnViewController.h"
 
-@interface TrainingTableViewController ()
+@interface LearnTableViewController ()
 
 @property (strong, nonatomic) SpellModel* spellModel;
 
 @end
 
-@implementation TrainingTableViewController
+@implementation LearnTableViewController
 
 // Gets an instance of the SpellModel class using lazy instantiation
 - (SpellModel*) spellModel {
@@ -90,11 +90,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    BOOL isVC = [[segue destinationViewController] isKindOfClass:[TrainingViewController class]];
+    BOOL isVC = [[segue destinationViewController] isKindOfClass:[LearnViewController class]];
     
     if (isVC) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        TrainingViewController *vc = [segue destinationViewController];
+        LearnViewController *vc = [segue destinationViewController];
         
         // Find the spell associated with the chosen table cell and send it to the VC
         Spell* spell;

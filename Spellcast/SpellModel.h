@@ -22,7 +22,6 @@
 
 - (Spell*) getSpellWithName:(NSString*)spellName;
 
-- (void)updateModel;
 - (void)sendFeatureArray:(NSArray*)data withLabel:(NSString*)label;
 
 @end

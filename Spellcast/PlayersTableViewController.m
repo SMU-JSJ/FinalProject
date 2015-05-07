@@ -107,6 +107,9 @@
 }
 
 - (void)startSearchingForNearbyPlayers {
+    [self.nearbyPlayers removeAllObjects];
+    [self.tableView reloadData];
+    
     [[GKMatchmaker sharedMatchmaker] startBrowsingForNearbyPlayersWithHandler:^(GKPlayer *player, BOOL reachable) {
         
         if (reachable && ![self.nearbyPlayers containsObject:player]) {
