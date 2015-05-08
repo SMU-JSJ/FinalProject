@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Spellcast/DuelViewController.m"
-            timestampString = "452746825.908351"
+            timestampString = "452750104.441572"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
             landmarkName = "-holdCastButton:"
             landmarkType = "5">
          </BreakpointContent>

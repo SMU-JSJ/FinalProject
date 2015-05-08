@@ -41,38 +41,37 @@
 @implementation LearnViewController
 
 // Gets an instance of the SpellModel class using lazy instantiation
-- (SpellModel*) spellModel {
+- (SpellModel*)spellModel {
     if(!_spellModel)
         _spellModel = [SpellModel sharedInstance];
     
     return _spellModel;
 }
 
--(CMMotionManager*)cmMotionManager{
-    if(!_cmMotionManager){
+- (CMMotionManager*)cmMotionManager {
+    if (!_cmMotionManager) {
         _cmMotionManager = [[CMMotionManager alloc] init];
         
-        if(![_cmMotionManager isDeviceMotionAvailable])
+        if(![_cmMotionManager isDeviceMotionAvailable]) {
             _cmMotionManager = nil;
-        else
+        } else {
             _cmMotionManager.deviceMotionUpdateInterval = UPDATE_INTERVAL;
+        }
     }
     return _cmMotionManager;
 }
 
--(NSOperationQueue*)backQueue{
-    
-    if(!_backQueue){
+- (NSOperationQueue*)backQueue {
+    if (!_backQueue) {
         _backQueue = [[NSOperationQueue alloc] init];
     }
     return _backQueue;
 }
 
--(RingBuffer*)ringBuffer{
-    if(!_ringBuffer){
+- (RingBuffer*)ringBuffer {
+    if (!_ringBuffer) {
         _ringBuffer = [[RingBuffer alloc] init];
     }
-    
     return _ringBuffer;
 }
 
@@ -190,7 +189,7 @@
                  
                  dispatch_async(dispatch_get_main_queue(), ^{
                      if ([actualSpellName isEqualToString:predictedSpellName] && accuracy > 0.5) {
-                         // Correct spell
+                         // Correct spell, flash green background
                          [UIView animateWithDuration:0.4 animations:^{
                              self.greenBackground.alpha = 1.0;
                          } completion:^(BOOL finished) {
@@ -199,7 +198,7 @@
                              } completion:nil];
                          }];
                      } else {
-                         // Incorrect spell
+                         // Incorrect spell, flash red background
                          [UIView animateWithDuration:0.4 animations:^{
                              self.redBackground.alpha = 1.0;
                          } completion:^(BOOL finished) {

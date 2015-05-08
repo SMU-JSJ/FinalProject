@@ -36,12 +36,12 @@
     self.match.delegate = viewController;
 }
 
--(void)endMatch {
+- (void)endMatch {
     [self.match disconnect];
     self.match = nil;
 }
 
--(void)sendMessage:(NSDictionary*)message toPlayersInMatch:(NSArray*)players {
+- (void)sendMessage:(NSDictionary*)message toPlayersInMatch:(NSArray*)players {
     NSError* err = nil;
     
     if (![self.match sendData:[NSKeyedArchiver archivedDataWithRootObject:message] toPlayers:players dataMode:GKMatchSendDataReliable error:&err]) {

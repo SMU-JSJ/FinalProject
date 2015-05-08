@@ -16,8 +16,8 @@
             desc:(NSString*) desc
             type:(SpellTypeState) type
         strength:(NSNumber*) strength
-            cost:(NSNumber*) cost
-{
+            cost:(NSNumber*) cost {
+    
     self = [super init];
     
     // Set member variables

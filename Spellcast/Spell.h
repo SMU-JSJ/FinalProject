@@ -10,20 +10,20 @@
 
 @interface Spell : NSObject
 
-// Constructor/initializer for a spell
-- (id) initSpell:(NSString*) name
-     translation:(NSString*) translation
-            desc:(NSString*) desc
-            type:(int) type
-        strength:(NSNumber*) strength
-            cost:(NSNumber*) cost;
-
 typedef enum spellTypeState {
     ATTACK,
     HEALMAGIC,
     HEALHEALTH,
     DEFEND
 } SpellTypeState;
+
+// Constructor/initializer for a spell
+- (id)initSpell:(NSString*) name
+    translation:(NSString*) translation
+           desc:(NSString*) desc
+           type:(SpellTypeState) type
+       strength:(NSNumber*) strength
+           cost:(NSNumber*) cost;
 
 // The Latin name of the spell
 @property (strong, nonatomic) NSString* name;
@@ -37,7 +37,5 @@ typedef enum spellTypeState {
 @property (strong, nonatomic) NSNumber* strength;
 // The amount of magic points a spell costs
 @property (strong, nonatomic) NSNumber* cost;
-
-
 
 @end

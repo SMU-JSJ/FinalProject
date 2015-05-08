@@ -46,38 +46,37 @@
 @implementation TrainViewController
 
 // Gets an instance of the SpellModel class using lazy instantiation
-- (SpellModel*) spellModel {
-    if(!_spellModel)
+- (SpellModel*)spellModel {
+    if (!_spellModel)
         _spellModel = [SpellModel sharedInstance];
     
     return _spellModel;
 }
 
--(CMMotionManager*)cmMotionManager{
-    if(!_cmMotionManager){
+- (CMMotionManager*)cmMotionManager {
+    if(!_cmMotionManager) {
         _cmMotionManager = [[CMMotionManager alloc] init];
         
-        if(![_cmMotionManager isDeviceMotionAvailable])
+        if (![_cmMotionManager isDeviceMotionAvailable]) {
             _cmMotionManager = nil;
-        else
+        } else {
             _cmMotionManager.deviceMotionUpdateInterval = UPDATE_INTERVAL;
+        }
     }
     return _cmMotionManager;
 }
 
--(NSOperationQueue*)backQueue{
-    
-    if(!_backQueue){
+- (NSOperationQueue*)backQueue {
+    if (!_backQueue) {
         _backQueue = [[NSOperationQueue alloc] init];
     }
     return _backQueue;
 }
 
--(RingBuffer*)ringBuffer{
-    if(!_ringBuffer){
+- (RingBuffer*)ringBuffer {
+    if (!_ringBuffer) {
         _ringBuffer = [[RingBuffer alloc] init];
     }
-    
     return _ringBuffer;
 }
 
@@ -139,23 +138,29 @@
 
 }
 
--(void)dealloc {
+- (void)dealloc {
     [self.cmMotionManager stopDeviceMotionUpdates];
 }
 
+// Change casting state when button is held down
 - (IBAction)holdCastButton:(UIButton *)sender {
     self.casting = YES;
 }
 
+// Stop casting when the use lifts finger
 - (IBAction)releaseCastButton:(UIButton *)sender {
     self.casting = NO;
 }
 
+// Stop casting when the use lifts finger
 - (IBAction)releaseCastButtonOutside:(UIButton *)sender {
     self.casting = NO;
 }
 
+// When the yes/no buttons are clicked, update the UI and send feature data
+// if appropriate
 - (IBAction)yesNoClicked:(UIButton *)sender {
+    // Change UI to display "Hold to Cast" instead of "Yes No"
     self.castSpellButton.hidden = NO;
     self.castSpellButton.enabled = YES;
     [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
@@ -163,10 +168,12 @@
     self.yesButton.hidden = YES;
     self.noButton.hidden = YES;
     
+    // If the user clicked "Yes", send the feature data
     if ([sender.currentTitle isEqualToString:@"Yes"]) {
         [self.spellModel sendFeatureArray:self.lastData withLabel:self.lastLabel];
     }
     
+    // Reset the displayed spell picture and name to default
     self.predictedSpellImageView.image = [UIImage imageNamed:@"train_icon"];
     self.predictedSpellNameLabel.text = @"Cast any spell!";
     [UIView transitionWithView:self.predictedSpellImageView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromBottom animations:nil completion:nil];
@@ -177,6 +184,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Predict the spell that the user cast
 - (void)predictFeature:(NSMutableArray*)featureData {
     [self.castSpellBackground setBackgroundColor:[[UIColor alloc] initWithRed:240/255.f green:240/255.f blue:240/255.f alpha:1]];
     
@@ -202,32 +210,46 @@
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-             if(!error){
+             // If not error was received
+             if (!error) {
+                 // Get response data
                  NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                  
+                 // Get name of the spell predicted
                  NSString *name = [NSString stringWithFormat:@"%@",[responseData valueForKey:@"prediction"]];
                  name = [[name substringToIndex:[name length] - 2] substringFromIndex:3];
                  self.lastLabel = name;
                  
+                 // Get accuracy of the spell predicted
                  double accuracy = [[responseData objectForKey:name] doubleValue];
                  
                  NSLog(@"Name = %@, Accuracy = %f", name, accuracy);
                  
+                 // Update UI
                  dispatch_async(dispatch_get_main_queue(), ^{
                      if ([self.spellModel getSpellWithName:name]) {
+                         // Valid spell name was found
+                         
+                         // Toggle displayed buttons
                          self.castSpellButton.hidden = YES;
                          self.yesButton.hidden = NO;
                          self.noButton.hidden = NO;
                          
+                         // Show the cast spell name and image and animate flip
                          self.predictedSpellNameLabel.text = [NSString stringWithFormat:@"%@?", name];
                          self.predictedSpellImageView.image = [UIImage imageNamed:name];
                          [UIView transitionWithView:self.predictedSpellImageView duration:0.5 options:UIViewAnimationOptionTransitionFlipFromTop animations:nil completion:nil];
+                         
                      } else {
+                         // Invalid spell name
+                         
+                         // Toggle displayed buttons back to the original
                          [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                          self.castSpellButton.enabled = YES;
                          [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
                          [self.castSpellButton setBackgroundColor:[UIColor whiteColor]];
                          
+                         // Spell not found alert
                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Spell not found"
                                                                          message:@"Please train more."
                                                                         delegate:nil
@@ -235,34 +257,28 @@
                                                                otherButtonTitles:nil];
                          [alert show];
                      }
-                     
                  });
+                 
              } else {
+                 // Connection error
+                 
+                 // Toggle displayed buttons back to the original
                  [self.castSpellButton setTitle:@"Hold to Cast" forState:UIControlStateNormal];
                  self.castSpellButton.enabled = YES;
                  [self.castSpellButton setTitleColor:[[UIColor alloc] initWithRed:46/255.f green:79/255.f blue:147/255.f alpha:1] forState:UIControlStateNormal];
                  [self.castSpellButton setBackgroundColor:[UIColor whiteColor]];
                  
+                 // Connection error alert
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection error"
                                                                  message:@"Please check your Internet connection."
                                                                 delegate:nil
                                                        cancelButtonTitle:@"OK"
                                                        otherButtonTitles:nil];
                  [alert show];
+                 
              }
          }];
     [postTask resume];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
