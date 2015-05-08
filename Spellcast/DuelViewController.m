@@ -267,17 +267,17 @@
             
             textColor = theirColor;
             boldedLength = 6;
-            newMove = [NSString stringWithFormat:@"Enemy: -%.0f HP %@\n", newStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"Enemy: -%.0f HP %@\n", newStrength*1000, spellName];
             
         } else if (spell.type == HEALMAGIC) {
             self.myMana.progress = self.myMana.progress - (finalStrength);
-            newMove = [NSString stringWithFormat:@"You: +%.0f Mana %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"You: +%.0f Mana %@\n", finalStrength*1000, spellName];
         } else if (spell.type == HEALHEALTH) {
             self.myHP.progress = self.myHP.progress - (finalStrength);
-            newMove = [NSString stringWithFormat:@"You: +%.0f HP %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"You: +%.0f HP %@\n", finalStrength*1000, spellName];
         }else if (spell.type == DEFEND) {
             self.myDefense = finalStrength;
-            newMove = [NSString stringWithFormat:@"You: +%.0f Defense %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"You: %.0f Defense %@\n", finalStrength*1000, spellName];
         }
     } else {
         if (self.theirMana.progress - cost < 0) {
@@ -292,7 +292,7 @@
         boldedLength = 6;
         
         if (spell.type == ATTACK) {
-            float newStrength = finalStrength - self.theirDefense;
+            float newStrength = finalStrength - self.myDefense;
             if (newStrength < 0) {
                 newStrength = 0;
             }
@@ -303,20 +303,20 @@
                 self.myDefense = 0;
             }
             
-            newMove = [NSString stringWithFormat:@"You: -%.0f HP %@\n", newStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"You: -%.0f HP %@\n", newStrength*1000, spellName];
             
             textColor = myColor;
             boldedLength = 4;
             
         } else if (spell.type == HEALMAGIC) {
             self.theirMana.progress = self.theirMana.progress + (finalStrength);
-            newMove = [NSString stringWithFormat:@"Enemy: +%.0f Mana %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"Enemy: +%.0f Mana %@\n", finalStrength*1000, spellName];
         } else if (spell.type == HEALHEALTH) {
             self.theirHP.progress = self.theirHP.progress + (finalStrength);
-            newMove = [NSString stringWithFormat:@"Enemy: +%.0f HP %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"Enemy: +%.0f HP %@\n", finalStrength*1000, spellName];
         }else if (spell.type == DEFEND) {
             self.theirDefense = finalStrength;
-            newMove = [NSString stringWithFormat:@"Enemy: +%.0f Defense %@\n", finalStrength*100, spellName];
+            newMove = [NSString stringWithFormat:@"Enemy: %.0f Defense %@\n", finalStrength*1000, spellName];
         }
     }
     
@@ -332,6 +332,9 @@
 }
 
 - (void)matchOver {
+    // Stop increasing mana
+    [self.manaTimer invalidate];
+    
     [self.castSpellButton setTitle:@"Exit Match" forState:UIControlStateNormal];
     
     NSString* message;

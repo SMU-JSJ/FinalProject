@@ -21,7 +21,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_full_background" translatesAutoresizingMaskIntoConstraints="NO" id="wWY-tH-fKZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73b-Nq-vRK">
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73b-Nq-vRK">
                                 <rect key="frame" x="0.0" y="449" width="320" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="350" verticalHuggingPriority="350" horizontalCompressionResistancePriority="850" verticalCompressionResistancePriority="850" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUA-Sq-cKP">
@@ -166,7 +166,7 @@
             </objects>
             <point key="canvasLocation" x="738" y="364"/>
         </scene>
-        <!--Learn-->
+        <!--Spell Book-->
         <scene sceneID="vA3-SK-sKS">
             <objects>
                 <tableViewController id="9AV-GX-2VM" customClass="LearnTableViewController" sceneMemberID="viewController">
@@ -208,7 +208,7 @@
                             <outlet property="delegate" destination="9AV-GX-2VM" id="cO6-RP-iHh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Learn" id="gyl-Wv-x6C"/>
+                    <navigationItem key="navigationItem" title="Spell Book" id="gyl-Wv-x6C"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B93-vK-VcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -251,7 +251,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiY-fI-peQ">
                                 <rect key="frame" x="0.0" y="449" width="320" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -525,7 +525,7 @@
                                     <constraint firstAttribute="width" constant="32" id="pvT-t0-nHO"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oki-9Y-tfN">
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oki-9Y-tfN">
                                 <rect key="frame" x="0.0" y="468" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

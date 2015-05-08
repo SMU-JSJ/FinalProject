@@ -72,10 +72,10 @@
         
         NSArray* spellNames = @[@"Percutio Cum Fulmini", @"Creo Leonem"];
         NSArray* spellTranslations = @[@"Lightning Strike", @"Conjure Lion"];
-        NSArray* spellDescriptions = @[@"Strikes a lightning bolt at the opponent.",
-                                       @"Conjures a lion and attacks the opponent."];
+        NSArray* spellDescriptions = @[@"Strikes a lightning bolt at the opponent.\n10 Attack, -10 Mana",
+                                       @"Conjures a lion and attacks the opponent.\n20 Attack, -15 Mana"];
         NSArray* spellStrengths = @[@10, @20];
-        NSArray* spellCosts = @[@5, @10];
+        NSArray* spellCosts = @[@10, @15];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
@@ -97,18 +97,18 @@
     if(!_healingSpells) {
         _healingSpells = [[NSMutableArray alloc] init];
         
-        NSArray* spellNames = @[@"Corpum Sano", @"Magicum Reddo", @"Mentem Curro"];
-        NSArray* spellTranslations = @[@"Heal Body",
+        NSArray* spellNames = @[@"Mentem Curro", @"Magicum Reddo", @"Corpum Sano"];
+        NSArray* spellTranslations = @[@"Heal Mind",
                                        @"Restore Magic",
-                                       @"Heal Mind"];
-        NSArray* spellDescriptions = @[@"Heals the user's body.",
-                                       @"Restores the user's spent magic.",
-                                       @"Heals the user's mind."];
+                                       @"Heal Body"];
+        NSArray* spellDescriptions = @[@"Heals the user's mind.\n+5 HP, -5 Mana",
+                                       @"Restores the user's spent magic.\n+10 Mana",
+                                       @"Heals the user's body.\n+18 HP, -15 Mana"];
         NSArray* spellTypes = @[[NSNumber numberWithInt:HEALHEALTH],
                                [NSNumber numberWithInt:HEALMAGIC],
                                [NSNumber numberWithInt:HEALHEALTH]];
-        NSArray* spellStrengths = @[@5, @10, @15];
-        NSArray* spellCosts = @[@5, @1, @10];
+        NSArray* spellStrengths = @[@5, @11, @18];
+        NSArray* spellCosts = @[@5, @1, @15];
         
         for (int i = 0; i < [spellNames count]; i++) {
             Spell* spell = [[Spell alloc] initSpell:spellNames[i]
@@ -132,9 +132,9 @@
         
         NSArray* spellNames = @[@"Arcesso Vallum Terrae", @"Claudo Animum"];
         NSArray* spellTranslations = @[@"Wall of Earth", @"Soul Shield"];
-        NSArray* spellDescriptions = @[@"Invokes a wall of earth to block attacks.",
-                                       @"Shields the user's soul for opponents."];
-        NSArray* spellStrengths = @[@10, @15];
+        NSArray* spellDescriptions = @[@"Invokes a wall of earth to block attacks.\n5 Defense, -5 Mana",
+                                       @"Shields the user's soul for opponents.\n10 Defense, -10 Mana"];
+        NSArray* spellStrengths = @[@5, @10];
         NSArray* spellCosts = @[@5, @10];
         
         for (int i = 0; i < [spellNames count]; i++) {

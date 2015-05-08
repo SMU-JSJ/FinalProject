@@ -178,6 +178,7 @@
 }
 
 - (void)showInvitePlayerPopup:(NSString*)playerName {
+    [self dismissInvitePlayerPopup];
     self.inviteSentAlert = [[UIAlertView alloc] initWithTitle:@"Invitation Sent"
                                                       message:[NSString stringWithFormat:@"An invite was sent to %@.", [self removeQuotes:playerName]]
                                                      delegate:self
@@ -192,6 +193,7 @@
 }
 
 - (void)showStartingDuelPopup {
+    [self dismissStartingDuelPopup];
     self.startingDuelAlert = [[UIAlertView alloc] initWithTitle:@"Starting duel..."
                                                       message:@"Get ready for the duel to start!"
                                                      delegate:self
