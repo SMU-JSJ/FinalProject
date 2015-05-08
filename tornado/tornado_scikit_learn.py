@@ -45,12 +45,8 @@ class Application(tornado.web.Application):
                         sklearnhandlers.UploadLabeledDatapointHandler),
                     (r"/GetNewDatasetId[/]?",
                         sklearnhandlers.RequestNewDatasetId),
-                    (r"/UpdateModelKNN[/]?",
-                        sklearnhandlers.UpdateModelForDatasetIdUsingKNN),  
                     (r"/UpdateModelSVM[/]?",
-                        sklearnhandlers.UpdateModelForDatasetIdUsingSVM),    
-                    (r"/PredictOneKNN[/]?",
-                        sklearnhandlers.PredictOneFromDatasetIdUsingKNN),      
+                        sklearnhandlers.UpdateModelForDatasetIdUsingSVM),     
                     (r"/PredictOneSVM[/]?",
                         sklearnhandlers.PredictOneFromDatasetIdUsingSVM),             
                     ]
