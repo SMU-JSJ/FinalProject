@@ -331,27 +331,34 @@
     }
 }
 
+- (BOOL)isMatchOver {
+    return [self.castSpellButton.currentTitle isEqualToString:@"Exit Match"];
+}
+
 - (void)matchOver {
-    // Stop increasing mana
-    [self.manaTimer invalidate];
-    
-    [self.castSpellButton setTitle:@"Exit Match" forState:UIControlStateNormal];
-    
-    NSString* message;
-    if (self.myHP.progress == 1 && self.theirHP.progress == 0) {
-        message = @"Tie.";
-    } else if (self.myHP.progress == 1) {
-        message = @"You Lose.";
-    } else if (self.theirHP.progress == 0) {
-        message = @"You Win!";
+    if (![self isMatchOver]) {
+        // Stop increasing mana
+        [self.manaTimer invalidate];
+        
+        [self.castSpellButton setTitle:@"Exit Match" forState:UIControlStateNormal];
+        
+        NSString* message;
+        if (self.myHP.progress == 1 && self.theirHP.progress == 0) {
+            message = @"Tie.";
+        } else if (self.myHP.progress == 1) {
+            message = @"You Lose.";
+            [self.matchModel sendMessage:@{@"command":@"youWin"} toPlayersInMatch:self.matchModel.match.players];
+        } else if (self.theirHP.progress == 0) {
+            message = @"You Win!";
+            [self.matchModel sendMessage:@{@"command":@"youLose"} toPlayersInMatch:self.matchModel.match.players];
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message
-                                                    message:nil
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-    
 }
 
 - (void)scrollBattleLogToBottom {
@@ -362,13 +369,13 @@
 }
 
 - (IBAction)holdCastButton:(UIButton *)sender {
-    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+    if (![self isMatchOver]) {
         self.casting = YES;
     }
 }
 
 - (IBAction)releaseCastButton:(UIButton *)sender {
-    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+    if (![self isMatchOver]) {
         self.casting = NO;
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -376,7 +383,7 @@
 }
 
 - (IBAction)releaseCastButtonOutside:(UIButton *)sender {
-    if (![sender.currentTitle isEqualToString:@"Exit Match"]) {
+    if (![self isMatchOver]) {
         self.casting = NO;
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -477,7 +484,15 @@ didChangeConnectionState:(GKPlayerConnectionState)state {
     NSDictionary* message = (NSDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     NSLog(@"Received '%@' from %@", message, player.displayName);
     
-    [self handleSpellCast:[message objectForKey:@"spellName"] spellAccuracy:[message objectForKey:@"spellAccuracy"] caster:1];
+    if ([[message objectForKey:@"command"] isEqualToString:@"youLose"]) {
+        self.myHP = 0;
+        [self matchOver];
+    } else if ([[message objectForKey:@"command"] isEqualToString:@"youWin"]) {
+        self.theirHP = 0;
+        [self matchOver];
+    } else {
+        [self handleSpellCast:[message objectForKey:@"spellName"] spellAccuracy:[message objectForKey:@"spellAccuracy"] caster:1];
+    }
 }
 
 
